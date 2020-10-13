@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mybatis.cdi.samples.ResultadoSPCursoMapper">
+	<select id="listaMCurso" resultType="org.mybatis.cdi.samples.ResultadoSPCurso" statementType="CALLABLE" >
+    	{call  desactiva_curso(#{arg1, mode=IN, jdbcType=VARCHAR})}
+	</select>
+</mapper>

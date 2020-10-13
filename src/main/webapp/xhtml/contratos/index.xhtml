@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <h:head>
+    <title>MyBatis CDI Sample</title>
+  </h:head>
+  <h:body>
+    <p>
+      User (Request Scoped) 
+      anotaciones para objetos inyectados. Un objeto que se define como @RequestScopedse crea una vez para cada solicitud y es compartido por todos los beans que lo inyectan a lo largo de una solicitud.
+      : #{testBean.user.id} - #{testBean.user.name}
+    </p>
+    <p>
+      User (Conversation Scoped):  
+      estamos definiendo el bean como capaz de rastrear una conversación con un cliente. El bean mantendrá su estado hasta que termine la conversación.
+		Mientras tanto, durante la conversación, el cliente puede ejecutar solicitudes AJAX contra el bean o navegar a otras páginas que todavía hacen referencia a este mismo bean administrado. En estos casos, el bean mantendrá su estado en las interacciones del cliente.
+ 		#{conv.user.id} - #{conv.user.name}
+    </p>
+    <p>
+      User (Session Scoped): 
+      Especifica que un bean tiene un alcance de sesión. El contexto de la sesión se comparte entre todas las solicitudes de servlet que se producen en la misma sesión HTTP. El contexto de la sesión se destruye cuando se agota el tiempo de espera de HTTPSession, después de que se haya llamado a todos los HttpSessionListeners y al final de cualquier solicitud en la que se haya llamado invalidate () , después de que se hayan llamado todos los filtros y ServletRequestListeners .
+       #{sess.user.id} - #{sess.user.name}
+    </p>
+    <p>
+      User (Stateless): 
+      EJB no existe una relación definida entre el proxy (y, por lo tanto, el cliente) y la instancia de bean real. Varios clientes pueden "compartir" una sola instancia de EJB entre invocaciones de métodos. Un cliente ansioso, por otro lado, podría sobrecargar el servidor y comunicarse con varias instancias a través del mismo proxy a la vez. Hay una relación N: M entre un cliente y las instancias de bean. El tamaño de M depende de la configuración del servidor y la carga de solicitud / transacción. Una solicitud siempre será manejada completamente por una sola instancia de bean. Varias solicitudes nunca compartirán una sola instancia simultáneamente. También es imposible para un cliente liberar una instancia o "desconectarse" o "disociarse" de ella.
+       #{testBean.userFromStateless.id} - #{testBean.userFromStateless.name}
+    </p>
+    <p>
+      User (Stateful): 
+      EJB La naturaleza con estado se define por una relación exacta 1: 1 entre el cliente y la instancia de bean asociada. Un cliente se comunica con exactamente una instancia de bean
+       #{testBean.userFromStateful.id} - #{testBean.userFromStateful.name}
+    </p>
+  </h:body>
+</html>
+

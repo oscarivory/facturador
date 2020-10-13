@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    
+    
+    <ui:define name="content">
+        
+        <style>
+        body {
+    
+    background-color: #F2F8FA;
+}
+
+
+        </style>       
+        
+        
+    
+        
+        
+        <p:breadCrumb>
+    <p:menuitem value="Categories" url="#" />
+    
+</p:breadCrumb>
+        
+        
+        
+        <div class="ui-g dashboard">
+            
+            
+             <div class="ui-g-12 ui-lg-6 global-sales">
+                <p:panel header="AVANCE UNIDADES ACTUALES">
+                    <div class="globe">
+                        <p:graphicImage name="images/dashboard/globe.png" library="paradise-layout" width="45"/>
+                    </div>
+                    
+                    <span class="sale-interval">OCTUBRE 2019 - NOVIEMBRE 2019 </span>
+                    
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <th >FILIAL</th>
+                                <th>04 OCT 2019</th>
+                                <th>04 NOV 2019</th>
+                                <TH></TH>
+                                <TH></TH>
+                            </tr>
+                           
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/costa-rica-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>CLARO COSTA RICA</td>
+                                <td>4055</td>
+                                <td>4234</td>
+                                <td>35%</td>
+                                <td><i class="fa fa-arrow-up" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/panama-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>CLARO PANAMA</td>
+                                <td>2500</td>
+                                <td>3214</td>
+                                <td>25%</td>
+                                <td><i class="fa fa-arrow-up" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/argentina-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>ARGENTINA</td>
+                                <td>3200</td>
+                                <td>2842</td>
+                                <td>28%</td>
+                                <td><i class="fa fa-arrow-down" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/colombia-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>CLARO COLOMBIA</td>
+                                <td>1750</td>
+                                <td>1942</td>
+                                <td>15%</td>
+                                <td><i class="fa fa-arrow-up" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p:panel>
+            </div>
+            
+            <div class="ui-g-12 ui-lg-6 global-sales">
+                <p:panel header="AVANCE $ NOVIEMBRE">
+                    <div class="globe">
+                        <p:graphicImage name="images/dashboard/globe.png" library="paradise-layout" width="45"/>
+                    </div>
+                    
+                    <span class="sale-interval">OCTUBRE 2019 - NOVIEMBRE 2019  </span>
+                    
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <TH>FILIAL</TH>
+                                <th>04 OCT 2019</th>
+                                <th>04 NOV 2019</th>
+                                <TH></TH>
+                                <TH></TH>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/costa-rica-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>CLARO COSTA RICA</td>
+                                <td>$20,333</td>
+                                <td>$65,445</td>
+                                <td>35%</td>
+                                <td><i class="fa fa-arrow-up" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/panama-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>CLARO PANAMA</td>
+                                <td>$45,495</td>
+                                <td>$68,789</td>
+                                <td>25%</td>
+                                <td><i class="fa fa-arrow-up" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/argentina-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>ARGENTINA</td>
+                                <td>$65,445</td>
+                                <td>$30,575</td>
+                                <td>28%</td>
+                                <td><i class="fa fa-arrow-down" /></td>
+                            </tr>
+                            <tr>
+                                <td><p:graphicImage name="images/dashboard/colombia-flag-small.png" library="paradise-layout" width="45"/></td>
+                                <td>CLARO COLOMBIA</td>
+                                <td>$65,445</td>
+                                <td>$80,465</td>
+                                <td>15%</td>
+                                <td><i class="fa fa-arrow-up" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p:panel>
+            </div>
+           
+            <div class="ui-g-12 ui-md-12">
+                <div class="ui-g card overview-box overview-box-1 no-gutter">
+                   <p:chart type="bar" model="#{ChartBurble.animatedModel2}" style="width:800%;" responsive="true"/>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <div class="ui-g card overview-box overview-box-2 no-gutter">
+                    <p:chart type="line" model="#{ChartBurble.multiAxisModel}" style="width:800px;" responsive="true"/>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <div class="ui-g card overview-box overview-box-1 no-gutter">
+                    <p:chart type="line" model="#{inicioG.dateModel}" style=" width: 800px;" responsive="true"/>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-4">
+                <div class="ui-g card overview-box overview-box-2 no-gutter">
+                    <p:chart type="bar" model="#{inicioG.horizontalBarModel}" style=" width: 800px;" responsive="true"/>
+                </div>
+            </div>
+            
+            <div class="ui-g-12 ui-lg-8 stats">
+                <p:panel header="FACTURAS">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-6 knob-container">
+                            <div class="knob">75%</div>
+                        </div>
+                        <div class="ui-g-12 ui-lg-6">
+                            <ul>
+                                <li>
+                                    <span class="statsbar-text">PAGADAS $75,000.00</span>
+                                    <div class="statsbar">
+                                        <div class="statsbar-value" style="width: 75%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="statsbar-text">PENDIENTES $25,000.00</span>
+                                    <div class="statsbar">
+                                        <div class="statsbar-value" style="width: 25%"></div>
+                                    </div>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </p:panel>
+            </div>
+            
+           
+        </div>
+    </ui:define>
+</ui:composition>

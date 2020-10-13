@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="../../template/template.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-stack {
+                z-index: 1000;
+            }
+            body .ui-widget-header {
+                background-color: #013c80;
+                color: #ffffff;
+                border: 1px solid #013c80;
+                padding: 8px 14px;
+            }
+        </style>
+        <script type="text/javascript">
+
+            Notification.requestPermission();
+
+            function handleDrop(event, ui) {
+                var dropped = ui.draggable;
+                dropped.fadeOut('fast');
+            }
+
+            function notificacion() {
+                if (Notification) {
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission()
+                    }
+                    var title = "Customer Experience"
+                    var extra = {
+                        con: "http://201.161.89.4:8090/CustomerExperience/faces/javax.faces.resource/images/logo.png?ln=barcelona-layout",
+                        //icon: "http://localhost:8080/CustomerExperience/faces/javax.faces.resource/images/logo.png?ln=barcelona-layout",
+                        body: "Notificación de carga exitosa"
+                    }
+                    var noti = new Notification(title, extra)
+                    noti.onclick = {}
+                    noti.onclose = {}
+                    setTimeout(function () {
+                        noti.close()
+                    }, 600000)
+                }
+            }
+
+        </script>
+    </ui:define>
+    <ui:define name="content">  
+        <h:form id="forma" prependId="false">
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card card-w-title">
+                            <h1>Aprovisionamiento - Call Center - Ventas</h1>
+                            <p:growl id="mensaje" showDetail="true" severity="info warn" life="5000" />
+                            <p:panelGrid columns="3" layout="grid" columnClasses="ui-grid-col-7,ui-grid-col-1,ui-grid-col-4" styleClass="ui-panelgrid-blank form-group">
+                                <p:selectOneButton>
+                                    <f:selectItem itemLabel="Residencial" itemValue="1" />
+                                    <f:selectItem itemLabel="PyME" itemValue="2" />
+                                    <f:selectItem itemLabel="Móvil" itemValue="3" />
+                                    <p:ajax process="@this" />
+                                </p:selectOneButton>
+                                <p:spacer/>
+                                <p:commandButton type="button" value="Descargar Plantilla" disabled="true" icon="ui-icon-archive" />
+                            </p:panelGrid>
+                            <p:panelGrid columns="6" layout="grid" columnClasses="ui-grid-col-1,ui-grid-col-4,ui-grid-col-1,ui-grid-col-4,ui-grid-col-1,ui-grid-col-4" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="tipo" value="Tipo:" style="font-weight: bold;"/>
+                                <p:selectOneMenu id="tipo">
+                                    <f:selectItem itemLabel="Selecciona una Tipo" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Carga Ventas" itemValue="1" />
+                                    <f:selectItem itemLabel="Carga Servicios al Cliente" itemValue="2" />
+                                    <f:selectItem itemLabel="Carga Retención" itemValue="3" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="empresa" value="Empresa:" style="font-weight: bold;"/>
+                                <p:selectOneMenu id="empresa">
+                                    <f:selectItem itemLabel="Selecciona una Empresa" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Argentina" itemValue="1" />
+                                    <f:selectItem itemLabel="Brasil Net" itemValue="2" />
+                                    <f:selectItem itemLabel="Chile" itemValue="3" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="mes" value="Mes:" style="font-weight: bold;"/>
+                                <p:selectOneMenu id="mes">
+                                    <f:selectItem itemLabel="Selecciona un Mes" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Julio - 2019" itemValue="1" />
+                                    <f:selectItem itemLabel="Junio - 2019" itemValue="2" />
+                                    <f:selectItem itemLabel="Mayo - 2019" itemValue="3" />
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                            <p:panelGrid columns="1" columnClasses="ui-grid-col-12" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:fileUpload id="archivo" mode="advanced" skinSimple="true" label="Selecciona archivo de Excel" uploadLabel="Cargar"
+                                              cancelLabel="Cancelar" invalidFileMessage="Se permiten archivos en Excel"
+                                              invalidSizeMessage="El archivo excede el tamaño permitido 15MB." 
+                                              fileLimitMessage="El archivo ya esta seleccionado" sizeLimit="15728640" multiple="false"
+                                              fileLimit="1" allowTypes="/(\.|\/)(xlsx|xls|XLSX|XLS)$/" process="@form" update="forma"/>
+                                <p:panel id="nombre" header="Archivo de Excel seleccionado">
+                                    <p:outputLabel value="Nombre del archivo seleccionado" />
+                                </p:panel>
+                            </p:panelGrid>
+                            <p:panelGrid columns="2" columnClasses="ui-grid-col-3,ui-grid-col-3" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:commandButton value="Confirmar la carga" process="@form" icon="ui-icon-check" ajax="true"
+                                                 update="forma" onclick="$('html, body').animate({scrollTop: 0}, 600);">
+                                    <p:confirm header="Confirmar acción" message="¿Está seguro de realizar la carga?" />
+                                </p:commandButton>
+                                <p:commandButton value="Cancelar" process="@this" icon="ui-icon-block" immediate="true" 
+                                                 ajax="false" update="forma"
+                                                 onclick="$('html, body').animate({scrollTop: 0}, 600);">
+                                    <p:resetInput target="forma" />
+                                </p:commandButton>
+                                <p:confirmDialog global="true">
+                                    <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" onclick="notificacion();" />
+                                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </p:panelGrid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

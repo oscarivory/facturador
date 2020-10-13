@@ -1,0 +1,221 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+    
+        <style type="text/css">
+th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    
+    #tblcoosto_data .ui-widget-content.ui-datatable-even,#tblcoosto_data .ui-widget-content.ui-datatable-odd{
+        background: #e7fcfc !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+            body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+
+                border: none;
+            }
+
+           .noHeader thead th { 
+        border: none !important; 
+        background: #ffffff !important;
+        height: 0px;
+        
+    }
+            .ui-datatable {
+                margin-bottom:20px;
+            }
+
+            .ui-datatable-frozenlayout-left {
+                width:20%;
+            }
+
+            .ui-datatable-frozenlayout-right {
+                width:80%;
+            }
+
+            .ui-state-default.customHeaderRed{
+                background-color:  red !important;
+            }
+            .ui-state-default.customHeaderYellow{
+                background-color: #e0e007 !important;
+            }
+            .ui-state-default.customHeaderGreen{
+                background-color:  green !important;
+            }
+
+
+        </style>
+        
+        
+        <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Reportes" url="#" />
+    <p:menuitem value="SS7" url="#" />
+    
+</p:breadCrumb>
+        
+        
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h:form>
+                        <p:dataTable id="tbl" var="car" value="#{ss7Bean.reporteSs7}" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                     paginator="true" rows="10" style="margin-bottom:20px">
+
+                            <f:facet name="header">
+                                <div  style="text-align:right;">
+                                    <h:commandLink>
+                                        <p:graphicImage name="/demo/reports/excel-l.png"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="cars" />
+                                    </h:commandLink>
+                                    <!-- <h:commandLink>
+                                         <p:graphicImage name="/demo/reports/pdf.png" />
+                                         <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+                                     </h:commandLink>
+                                     <h:commandLink>
+                                         <p:graphicImage name="/demo/reports/csv.png" />
+                                         <p:dataExporter type="csv" target="tbl" fileName="cars" />
+                                     </h:commandLink>
+
+                                     <h:commandLink>
+                                         <p:graphicImage name="/demo/reports/xml.png"/>
+                                         <p:dataExporter type="xml" target="tbl" fileName="cars" />
+                                     </h:commandLink>-->
+                                </div>  
+
+
+                            </f:facet>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha" />
+                                </f:facet>
+                                <h:outputText value="#{car.fecha}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Zona"/>
+                                </f:facet>
+                                <h:outputText value="#{car.zona}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Operacion AMX" />
+                                </f:facet>
+                                <h:outputText value="#{car.operacionAmx}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Roaming Partner" />
+                                </f:facet>
+                                <h:outputText value="#{car.roamingPartner}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="País Origen" />
+                                </f:facet>
+                                <h:outputText value="#{car.paisOrigen}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="País Destino" />
+                                </f:facet>
+                                <h:outputText value="#{car.paisDestino}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ANSI Inbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ansiMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ANSI Outbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ansiMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ITU Inbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ituMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ITU Outbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ituMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total MSU's Inb" />
+                                </f:facet>
+                                <h:outputText value="#{car.totalMsusInb}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total MSU's Out" />
+                                </f:facet>
+                                <h:outputText value="#{car.totalMsusOut}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Costo MSU's Out" />
+                                </f:facet>
+                                <h:outputText value="#{car.costoMsusOut}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

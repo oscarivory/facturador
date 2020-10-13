@@ -1,0 +1,182 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Validacion</ui:define>
+
+    <ui:define name="content">
+        <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Facturacion" url="#" />
+    <p:menuitem value="Telcel" url="#" />
+    <p:menuitem value="Validación" url="#" />
+    
+</p:breadCrumb>
+    <style type="text/css">
+        th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+    .ui-panelgrid td, .ui-panelgrid tr
+    {
+     border-style: none !important
+    }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+     body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+  
+    border: none;
+}
+
+  
+         </style>
+        
+        
+        
+        <p:panel id="uno" rendered="true" >
+            <p:panelGrid columns="8" columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-1" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:outputLabel for="month" value="Periodo:" /><p:datePicker id="month" placeholder="Mes/Año" view="month" value="#{calendarView.date3}" pattern="MM/yyyy" yearNavigator="true" yearRange="2000:2030" />
+                <p:outputLabel for="servicio" value="Servicio:" />
+                <p:selectOneMenu id="servicio">
+                        <f:selectItem itemLabel="Servicio" itemValue="0" noSelectionOption="true" />
+                        <f:selectItem itemLabel="SS7" itemValue="ss7" />
+                        <f:selectItem itemLabel="DIAMETER" itemValue="diameter" />
+                        <f:selectItem itemLabel="GRX" itemValue="grx" />
+                    </p:selectOneMenu>
+                 <p:outputLabel for="filial" value="Filial:" />   
+                <p:selectOneMenu id="filial">
+                        <f:selectItem itemLabel="TODO" itemValue="0" noSelectionOption="true" />
+                        <f:selectItem itemLabel="ARGENTINA" itemValue="1" />
+                        <f:selectItem itemLabel="BRASIL" itemValue="2" />
+                        <f:selectItem itemLabel="COLOMBIA" itemValue="3" />
+                    </p:selectOneMenu>
+                    <p:commandButton type="button" value="Consultar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/>
+                    <p:commandButton type="button" value="Autorizar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/>
+                
+            </p:panelGrid>
+            <p:panelGrid columns="1" columnClasses="ui-g-12" styleClass="card card-w-title c-ligth" layout="grid">
+                <h:form>
+                        <p:dataTable id="tbl" var="car" value="#{ss7Bean.reporteSs7}" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                     paginator="true" rows="10" style="margin-bottom:20px">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha" />
+                                </f:facet>
+                                <h:outputText value="#{car.fecha}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Zona"/>
+                                </f:facet>
+                                <h:outputText value="#{car.zona}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Operacion AMX" />
+                                </f:facet>
+                                <h:outputText value="#{car.operacionAmx}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Roaming Partner" />
+                                </f:facet>
+                                <h:outputText value="#{car.roamingPartner}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="País Origen" />
+                                </f:facet>
+                                <h:outputText value="#{car.paisOrigen}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="País Destino" />
+                                </f:facet>
+                                <h:outputText value="#{car.paisDestino}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ANSI Inbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ansiMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ANSI Outbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ansiMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ITU Inbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ituMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ITU Outbound" />
+                                </f:facet>
+                                <h:outputText value="#{car.ituMsus}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total MSU's Inb" />
+                                </f:facet>
+                                <h:outputText value="#{car.totalMsusInb}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total MSU's Out" />
+                                </f:facet>
+                                <h:outputText value="#{car.totalMsusOut}" />
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Costo MSU's Out" />
+                                </f:facet>
+                                <h:outputText value="#{car.costoMsusOut}" />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+            </p:panelGrid>
+        </p:panel>
+    </ui:define>
+</ui:composition>

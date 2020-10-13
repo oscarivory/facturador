@@ -1,0 +1,127 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+    <style type="text/css">
+    .ui-panelgrid td, .ui-panelgrid tr
+    {
+     border-style: none !important
+    }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+    
+            th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+    
+         </style>
+
+            <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Proveedores" url="#" style="color:blue;"/>
+    <p:menuitem value="Contratos" url="#" />
+    <p:menuitem value="Litado de contratos" url="#" />
+    
+</p:breadCrumb>
+        <p:growl id="growl" showDetail="true" />
+        <h:form>
+
+            <p:dataTable widgetVar="tableContratos" var="car" value="#{dtBasicView.contratos}">
+                <f:facet name="header">
+                    <p:linkButton outcome="nuevoContrato_p" value="Agregar Contrato" icon="fa fa-plus-circle" >
+                        <f:param name="lista" value="1" />
+                    </p:linkButton>
+                </f:facet>
+
+
+                <p:column filterBy="#{car.empresa}" filterMatchMode="exact" headerText="Empresa" priority="1">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('tableContratos').filter()" styleClass="custom-filter">
+                            <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Embratel" itemValue="Embratel" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Net Servicios" itemValue="Net Servicios" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Telgua" itemValue="Telgua" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Claro Argentina" itemValue="Claro Argentina" noSelectionOption="true" />
+                            <f:selectItem itemLabel="AMX Paraguay" itemValue="AMX Paraguay" noSelectionOption="true" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    <h:outputText value="#{car.empresa}" />
+                </p:column>
+
+                <p:column filterBy="#{car.comtrato}" filterMatchMode="contains" headerText="Contrato" priority="1">
+                    <p:link outcome="nuevoContrato_p" value="#{car.comtrato}">
+                        <f:param name="productId" value="10" />
+                    </p:link>
+                    
+                    
+                </p:column>
+
+                <p:column headerText="Inicio" priority="5" >
+                    <h:outputText value="#{car.inicio}" />
+                </p:column>
+
+                <p:column headerText="Fin"  priority="6" >
+                    <h:outputText value="#{car.fin}" />
+                </p:column>
+
+                <p:column headerText="Estatus" priority="4">
+                    <h:outputText value="#{car.estatus}" />
+                </p:column>
+
+               
+            </p:dataTable>
+
+        </h:form>
+
+        
+        <p:dialog header="Documentos" widgetVar="dialogDoc" modal="true" showEffect="blind" resizable="true" width="50%">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:dataList value="#{dtDoctos.documentos}" var="car" type="unordered" itemType="none" rows="10">
+                        <p:commandButton value="#{documento}" id="iconOnly2"  style="margin-right:20px;" icon="fa fa-file-pdf-o" onclick="PF('carDialog').show()" >
+                            
+                        </p:commandButton>    
+                        <!-- 
+                         <p:commandLink  oncomplete="PF('carDialog').show()" title="View Detail" styleClass="" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
+                             <f:setPropertyActionListener value="#{documento}" target="#{dtDoctos.documentos}" />
+                             <h:outputText value="#{car.nombre}" />
+                         </p:commandLink> -->
+                        <h:outputText value="#{car.nombre}" style="display:inline-block"/>
+                    </p:dataList>
+                        </p:outputPanel>
+                    </p:dialog>
+        
+        <p:dialog header="Documento" widgetVar="carDialog" modal="true" showEffect="blind" resizable="true" width="500px" height="800px">
+                        <p:outputPanel id="carDetail2" style="text-align:center;">
+                            <p:media value="https://www.w3.org/TR/2000/REC-xhtml-basic-20001219/xhtml-basic.pdf" width="100%" >
+                               <h:outputLink value="https://www.w3.org/TR/2000/REC-xhtml-basic-20001219/xhtml-basic.pdf"/>
+                            </p:media>
+                        </p:outputPanel>
+                    </p:dialog>
+    </ui:define>
+
+</ui:composition>

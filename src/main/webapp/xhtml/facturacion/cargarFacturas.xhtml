@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Cargar</ui:define>
+
+    <ui:define name="content">
+               <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Facturacion" url="#" />
+    <p:menuitem value="Telcel" url="#" />
+    <p:menuitem value="Cargar Facturas" url="#" />
+    
+</p:breadCrumb>
+             <style type="text/css">
+th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }                 
+    .ui-panelgrid td, .ui-panelgrid tr
+    {
+     border-style: none !important
+    }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+     body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+  
+    border: none;
+}
+
+  
+       
+        </style>
+        <p:panel id="uno" rendered="true">
+            
+            <p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-4" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:outputLabel for="month" value="Periodo:" /><p:datePicker id="month" placeholder="Mes/Año" view="month" value="#{calendarView.date3}" pattern="MM/yyyy" yearNavigator="true" yearRange="2000:2030" />
+                <p:commandButton type="button" value="Consultar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/>
+                <p:fileUpload value="#{fileUploadView.file}" label="Cargar Relacion de Facturas" mode="simple" skinSimple="true" />
+            </p:panelGrid>
+            
+            
+           
+            <p:panelGrid columns="1" columnClasses="ui-g-12" styleClass="card card-w-title c-ligth" layout="grid">
+                <h:form>
+                    <p:dataTable id="tbl" var="car" value="#{cargarRFacturas.facturas}" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                 paginator="true" rows="10" styleClass="noHeader" scrollable="true" >
+
+                        <p:column headerText="Fecha Factura"><h:outputText value="#{car.fechaFactura}" /></p:column>
+                        <p:column headerText="Periodo Factura"><h:outputText value="#{car.periodoFactura}" /></p:column>
+                        <p:column headerText="Factura"><h:outputText value="#{car.factura}" /></p:column>
+                        <p:column headerText="Solicitante"><h:outputText value="#{car.solicitante}" /></p:column>
+                        <p:column headerText="Tading"><h:outputText value="#{car.tadig}" /></p:column>
+                        <p:column headerText="Nombre"><h:outputText value="#{car.nombre}" /></p:column>
+                        <p:column headerText="Monto Total"><h:outputText value="#{car.montoTotal}" /></p:column>
+                        <p:column headerText="Mon."><h:outputText value="#{car.mon}" /></p:column>
+                        <p:column headerText="Servicio"><h:outputText value="#{car.servicio}" /></p:column>
+                        <p:column headerText="No. Docto"><h:outputText value="#{car.noDocto}" /></p:column>
+                        <p:column headerText="T.C."><h:outputText value="#{car.TC}" /></p:column>
+                        
+                    </p:dataTable>
+                </h:form>
+            </p:panelGrid>
+        </p:panel>
+    </ui:define>
+</ui:composition>

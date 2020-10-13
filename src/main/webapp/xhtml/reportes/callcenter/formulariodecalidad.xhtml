@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="../../template/template.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-stack {
+                z-index: 1000;
+            }
+            .texto_1 {
+                color: #FF0000;
+            }
+            .texto_2 {
+                color: #ff8000;
+            }
+            .texto_3 {
+                color: #00cc33;
+            }
+            .texto_4 {
+                color: #000000;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="forma" prependId="false">
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card card-w-title">
+                            <h1>Reportes - Call Center - Formulario de Calidad</h1>
+                            <p:growl id="mensaje" showDetail="true" severity="info warn" life="5000" />
+                            <p:dataTable var="lists" value="#{formulario.list}" scrollable="true" scrollHeight="500" style="width: 100%">
+                                <f:facet name="header">
+                                    04 - 2019
+                                </f:facet>
+                                <p:columnGroup type="header">
+                                    <p:row>
+                                        <p:column headerText="Indicadores" />
+                                        <p:column headerText="Colombia" />
+                                        <p:column headerText="Perú" />
+                                        <p:column headerText="República Dominicana" />
+                                        <p:column headerText="Nicaragua" />
+                                        <p:column headerText="Guatemala" />
+                                        <p:column headerText="El Salvador" />
+                                        <p:column headerText="Mejor Práctica" />
+                                    </p:row>
+                                </p:columnGroup>
+                                <p:subTable var="indicadores" value="#{lists.indicadores}">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{lists.seccion}" />
+                                    </f:facet>
+                                    <p:column>
+                                        <h:outputText value="#{indicadores.indicador}" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText styleClass="texto_#{indicadores.color}" value="#{indicadores.dato} " />
+                                        <p:graphicImage name="images/icon_#{indicadores.icon}.png" library="barcelona-layout" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText styleClass="texto_#{indicadores.color-1}" value="#{indicadores.dato} " />
+                                        <p:graphicImage name="images/icon_#{indicadores.icon}.png" library="barcelona-layout" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText styleClass="texto_#{indicadores.color-2}" value="#{indicadores.dato} " />
+                                        <p:graphicImage name="images/icon_#{indicadores.icon}.png" library="barcelona-layout" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText styleClass="texto_#{indicadores.color}" value="#{indicadores.dato} " />
+                                        <p:graphicImage name="images/icon_#{indicadores.icon}.png" library="barcelona-layout" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText styleClass="texto_#{indicadores.color-2}" value="#{indicadores.dato} " />
+                                        <p:graphicImage name="images/icon_#{indicadores.icon}.png" library="barcelona-layout" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText styleClass="texto_#{indicadores.color-1}" value="#{indicadores.dato} " />
+                                        <p:graphicImage name="images/icon_#{indicadores.icon}.png" library="barcelona-layout" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputText value="#{indicadores.practica}" />
+                                    </p:column>
+                                </p:subTable>
+                            </p:dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

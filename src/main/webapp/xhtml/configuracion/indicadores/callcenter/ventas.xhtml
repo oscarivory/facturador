@@ -1,0 +1,147 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="../../../template/template.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-stack {
+                z-index: 1000;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="forma" prependId="false">
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card card-w-title">
+                            <h1>Configuración - Indicadores - Call Center - Ventas</h1>
+                            <p:growl id="mensaje" showDetail="true" severity="info warn" life="5000" />
+                            <p:panelGrid columns="1" layout="grid" columnClasses="ui-grid-col-12" styleClass="ui-panelgrid-blank form-group">
+                                <p:selectOneButton>
+                                    <f:selectItem itemLabel="Residencial" itemValue="1" />
+                                    <f:selectItem itemLabel="PyME" itemValue="2" />
+                                    <f:selectItem itemLabel="Móvil Prepago" itemValue="3" />
+                                    <f:selectItem itemLabel="Móvil Pospago" itemValue="4" />
+                                    <p:ajax process="@this" />
+                                </p:selectOneButton>
+                            </p:panelGrid>
+                            <p:panelGrid columns="6" layout="grid" columnClasses="ui-grid-col-1,ui-grid-col-4,ui-grid-col-1,ui-grid-col-4,ui-grid-col-1,ui-grid-col-4" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="tipo" value="Tipo:" style="font-weight: bold;"/>
+                                <p:selectOneMenu id="tipo">
+                                    <f:selectItem itemLabel="Selecciona una Tipo" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Carga Ventas" itemValue="1" />
+                                    <f:selectItem itemLabel="Carga Servicios al Cliente" itemValue="2" />
+                                    <f:selectItem itemLabel="Carga Retención" itemValue="3" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="empresa" value="Empresa:" style="font-weight: bold;"/>
+                                <p:selectOneMenu id="empresa">
+                                    <f:selectItem itemLabel="Selecciona una Empresa" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Argentina" itemValue="1" />
+                                    <f:selectItem itemLabel="Brasil Net" itemValue="2" />
+                                    <f:selectItem itemLabel="Chile" itemValue="3" />
+                                </p:selectOneMenu>
+                                <p:outputLabel for="mes" value="Año:" style="font-weight: bold;"/>
+                                <p:selectOneMenu id="mes">
+                                    <f:selectItem itemLabel="Selecciona un Año" itemValue="0" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="2019" itemValue="1" />
+                                    <f:selectItem itemLabel="2018" itemValue="2" />
+                                    <f:selectItem itemLabel="2017" itemValue="3" />
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                            <p:panelGrid columns="1" layout="grid" columnClasses="ui-grid-col-3" styleClass="ui-panelgrid-blank form-group">
+                                <p:commandButton value="Nueva Configuración" icon="ui-icon-new" oncomplete="PF('dlg').show();"/>
+                            </p:panelGrid>
+                            <p:dataTable id="indicadores" value="#{callcenterventas.list}" filterBy="#{callcenterventas.filter}" var="list"
+                                         widgetVar="dt" rows="10" paginatorPosition="top" paginator="true"
+                                         reflow="true" emptyMessage="Información no disponible.">
+                                <p:column headerText="Indicador" filterBy="#{list.indicador}"><h:outputText value="#{list.indicador}" /></p:column>
+                                <p:column headerText="Tipo" filterBy="#{list.empresa}"><h:outputText value="#{list.empresa}" /></p:column>
+                                <p:column headerText="Empresa" filterBy="#{list.empresa}"><h:outputText value="#{list.empresa}" /></p:column>
+                                <p:column headerText="Gestión" filterBy="#{list.gestion}"><h:outputText value="#{list.gestion}" /></p:column>
+                                <p:column headerText="Meses" filterBy="#{list.umbral}"><h:outputText value="#{list.umbral}" /></p:column>
+                                <p:column headerText="" style="width: 65px">
+                                    <p:commandButton title="Modificar Configuración" icon="ui-icon-settings" oncomplete="PF('dlgM').show();"/>
+                                    <p:commandButton title="Eliminar Registro" icon="ui-icon-delete-sweep">
+                                        <p:confirm header="Confirmar acción" message="¿Está seguro de realizar la acción?" />
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+                            <p:confirmDialog global="true">
+                                <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:dialog widgetVar="dlg" modal="true" position="top" responsive="true" header="Nuevo Indicador"
+                                      showEffect="fade" hideEffect="fade" draggable="false" resizable="false" width="55%">
+                                <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-4" styleClass="ui-panelgrid-blank form-group">
+                                    <p:outputLabel for="switchN" value="Configurar varios:" style="font-weight: bold;"/>
+                                    <p:inputSwitch id="switchN" />
+                                </p:panelGrid>
+                                <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" styleClass="ui-panelgrid-blank form-group">
+                                    <p:outputLabel for="tipoN" value="Tipo:" style="font-weight: bold;"/>
+                                    <p:selectOneMenu id="tipoN">
+                                        <f:selectItem itemLabel="Selecciona una Tipo" itemValue="0" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Carga Ventas" itemValue="1" />
+                                        <f:selectItem itemLabel="Carga Servicios al Cliente" itemValue="2" />
+                                        <f:selectItem itemLabel="Carga Retención" itemValue="3" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="empresaN" value="Empresa:" style="font-weight: bold;"/>
+                                    <p:selectOneMenu id="empresaN">
+                                        <f:selectItem itemLabel="Selecciona una Empresa" itemValue="0" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Argentina" itemValue="1" />
+                                        <f:selectItem itemLabel="Brasil Net" itemValue="2" />
+                                        <f:selectItem itemLabel="Chile" itemValue="3" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="indicadorN" value="Indicador:" style="font-weight: bold;"/>
+                                    <p:selectOneMenu id="indicadorN">
+                                        <f:selectItem itemLabel="Selecciona un Indicador" itemValue="0" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Abandono de Llamadas" itemValue="1" />
+                                        <f:selectItem itemLabel="Brasil Net" itemValue="2" />
+                                        <f:selectItem itemLabel="Chile" itemValue="3" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="mesN" value="Año:" style="font-weight: bold;"/>
+                                    <p:selectOneMenu id="mesN">
+                                        <f:selectItem itemLabel="Selecciona un Año" itemValue="0" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="2019" itemValue="1" />
+                                        <f:selectItem itemLabel="2018" itemValue="2" />
+                                        <f:selectItem itemLabel="2017" itemValue="3" />
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                                <p:dataTable id="indicadoresN" value="#{callcenterventas.indicadores}" var="list"
+                                             paginatorPosition="top" widgetVar="dt" paginator="true" rows="5"
+                                             reflow="true"  emptyMessage="Información no disponible.">
+                                    <p:column headerText="Mes"><h:outputText value="#{list.indicador}" /></p:column>
+                                    <p:column headerText="Disponibilidad"><h:outputText value="#{(list.disponibilidad)?'Disponible':'No Disponible'}" /></p:column>
+                                    <p:column headerText="" style="width: 30px">
+                                        <p:commandButton icon="#{(list.disponibilidad)?'ui-icon-radio-on':'ui-icon-radio-off'}" title="#{(list.disponibilidad)?'Cambiar a No Disponible':'Cambiar a Disponible'}" />
+                                    </p:column>
+                                </p:dataTable>
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                    <p:commandButton value="Confirmar" process="@form" icon="ui-icon-check" ajax="true"
+                                                     update="forma" onclick="$('html, body').animate({scrollTop: 0}, 600);">
+                                        <p:confirm header="Confirmar acción" message="¿Está seguro de realizar esta acción?" />
+                                    </p:commandButton>
+                                    <p:commandButton value="Cancelar" process="@this" icon="ui-icon-block" immediate="true" 
+                                                     ajax="false" update="forma"
+                                                     onclick="$('html, body').animate({scrollTop: 0}, 600);">
+                                        <p:resetInput target="forma" />
+                                    </p:commandButton>
+                                    <p:confirmDialog global="true">
+                                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+                                </p:panelGrid>
+                            </p:dialog>
+                            <p:dialog widgetVar="dlgM" modal="true" position="top" responsive="true" header="Modificar Indicador"
+                                      showEffect="fade" hideEffect="fade" draggable="false" resizable="false" width="55%">
+                            </p:dialog>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

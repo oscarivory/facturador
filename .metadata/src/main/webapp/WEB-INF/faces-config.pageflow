@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15765433738190" configfile="/facturadorAMX/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="xhtml/login/login.xhtml" x="338" y="178" id="pf15892385262400" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" outlinks="pf15892385262401" inlinks="pf15892385262402" path="/xhtml/login/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="xhtml/inicio/inicio.xhtml" x="554" y="178" id="pf15892385262403" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15892385262401" path="/xhtml/inicio/inicio.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="178" id="pf15892385262404" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf15892385262402" path="*"/>
+  <links id="pf15892385262401" target="pf15892385262403" source="pf15892385262400" outcome="inicio" redirect="true"/>
+  <links id="pf15892385262402" target="pf15892385262400" source="pf15892385262404" outcome="salir"/>
+</pageflow:Pageflow>

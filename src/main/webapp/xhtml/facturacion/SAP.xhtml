@@ -1,0 +1,155 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Validacion</ui:define>
+
+    <ui:define name="content">
+                <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Facturacion" url="#" />
+    <p:menuitem value="Telcel" url="#" />
+    <p:menuitem value="Exportar SAP" url="#" />
+    
+</p:breadCrumb>
+ 
+        <script type="text/javascript">
+            //<![CDATA[
+            $( document ).ready(function() {
+                //alert( "ready!" );
+             
+                
+            });
+            
+           
+            //]]>
+        </script> 
+        
+        
+        <style type="text/css">
+   
+            th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+            
+            
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+      
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #000000 !important;
+        border-right : #000000 !important;
+        border-top: #000000 !important;
+        text-align:right;
+        margin-right:0%;
+    }
+    body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+  
+        border: none;
+    }
+   
+   .noHeader thead th { 
+        border: none !important; 
+        background: #ffffff !important; 
+    }
+     .ui-datatable {
+      margin-bottom:20px;
+  }
+ 
+  .ui-datatable-frozenlayout-left {
+      width:20%;
+  }
+ 
+  .ui-datatable-frozenlayout-right {
+      width:80%;
+  }
+    
+    </style>
+        
+        <p:panel id="uno" rendered="true">
+           
+               <p:panelGrid columns="8" columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-1,ui-g-12 ui-md-1" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:outputLabel for="month" value="Periodo:" /><p:datePicker id="month" placeholder="Mes/Año" view="month" value="#{calendarView.date3}" pattern="MM/yyyy" yearNavigator="true" yearRange="2000:2030" />
+                <p:outputLabel for="servicio" value="Servicio:" />
+                <p:selectOneMenu id="servicio">
+                        <f:selectItem itemLabel="Servicio" itemValue="0" noSelectionOption="true" />
+                        <f:selectItem itemLabel="SS7" itemValue="ss7" />
+                        <f:selectItem itemLabel="DIAMETER" itemValue="diameter" />
+                        <f:selectItem itemLabel="GRX" itemValue="grx" />
+                    </p:selectOneMenu>
+                 <p:outputLabel for="filial" value="Filial:" />   
+                <p:selectOneMenu id="filial">
+                        <f:selectItem itemLabel="TODO" itemValue="0" noSelectionOption="true" />
+                        <f:selectItem itemLabel="ARGENTINA" itemValue="1" />
+                        <f:selectItem itemLabel="BRASIL" itemValue="2" />
+                        <f:selectItem itemLabel="COLOMBIA" itemValue="3" />
+                    </p:selectOneMenu>
+                    <p:commandButton type="button" value="Consultar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/>
+            </p:panelGrid>
+                
+                
+                
+            <p:panelGrid columns="1" columnClasses="ui-g-12" styleClass="card card-w-title c-ligth" layout="grid">
+                <h:form>
+                        <p:dataTable id="tbl" var="car" value="#{exportSAP.layouts}" 
+                                     rows="10" scrollable="true" scrollWidth="100%" 
+                                     styleClass="noHeader" reflow="true">
+
+                            <f:facet name="header">
+                                <div  style="text-align:right;">
+                                    <h:commandLink>
+                                        <p:graphicImage name="/demo/reports/excel-l.png"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="Layout-SAP" />
+                                    </h:commandLink>
+                          
+                                </div>  
+                            </f:facet>
+                            <p:column  width="2"><h:outputText value="#{car.s1}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s2}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s3}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s4}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s5}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s6}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s7}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s8}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s9}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s10}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s11}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s12}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s13}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s14}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s15}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s16}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s17}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s18}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s19}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s20}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s21}" /></p:column>
+                            <p:column  width="2"><h:outputText value="#{car.s22}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s23}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s24}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s25}" /></p:column>
+                            <p:column  width="20"><h:outputText value="#{car.s26}" /></p:column>
+                            <p:column width="500"><h:outputText value="#{car.s27}" /></p:column>
+                        </p:dataTable>
+                    </h:form>
+            </p:panelGrid>
+        </p:panel>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="../template/template.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-stack {
+                z-index: 1000;
+            }
+        </style>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="forma" prependId="false">
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card card-w-title">
+                            <h1>Seguridad - Usuarios</h1>
+                            <p:growl id="mensaje" showDetail="true" severity="info warn" life="5000" globalOnly="true"/>
+                            <p:panelGrid columns="1" layout="grid" columnClasses="ui-grid-col-3" styleClass="ui-panelgrid-blank form-group">
+                                <p:commandButton type="button" value="Agregar Usuario" icon="ui-icon-new" onclick="PF('newdlg_usuarios').show();"/>
+                            </p:panelGrid>
+                            <p:dataTable id="usuarios" widgetVar="tableFilter" var="list" value="#{usuarios.list}" filterBy="#{usuarios.filter}"
+                                         rows="7" paginator="true" paginatorPosition="top" emptyMessage="No se encontraron resultados">
+                                <p:column headerText="Nombre Completo" filterBy="#{list.nombreUsuario}" filterMatchMode="contains">
+                                    <h:outputText value="#{list.nombreUsuario}" />
+                                </p:column>
+                                <p:column headerText="Cuenta de Usuario" filterBy="#{list.claveUsuario}" filterMatchMode="contains">
+                                    <h:outputText value="#{list.claveUsuario}" />
+                                </p:column>
+                                <p:column headerText="Estatus" filterBy="#{list.compartido}">                                           
+                                    <h:outputText value="#{(list.compartido == 1)?'Activo en CX':'Inactivo en CX'}" />
+                                </p:column>
+                                <p:column headerText="" style="width:60px;text-align: center;" exportable="false">
+                                    <p:commandButton icon="#{(list.compartido == 1)?'ui-icon-radio-on':'ui-icon-radio-off'}" title="#{(list.compartido == 1)?'Cambiar a Inactivo':'Cambiar a Activo'}" />
+                                </p:column>
+                            </p:dataTable>
+                            <p:dialog header="Nuevo Usuario" widgetVar="newdlg_usuarios" width="500" position="center" modal="true" responsive="true">
+                                <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2,ui-grid-col-10" styleClass="ui-panelgrid-blank form-group">
+                                    <p:outputLabel value="Usuario:" for="event" style="font-weight: bold;"/>
+                                    <p:autoComplete id="event" value="#{usuarios.nombre}" completeMethod="#{usuarios.complete}" minQueryLength="3" maxResults="3">
+                                        <p:ajax event="itemSelect" listener="#{usuarios.onItemSelect}" update="mensaje" />
+                                    </p:autoComplete>
+                                </p:panelGrid>
+                                <p:panelGrid columns="1" layout="grid" columnClasses="ui-grid-col-12" styleClass="ui-panelgrid-blank form-group">
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText id="nombre" value="Soporte Hitss" disabled="true"/>
+                                        <label>Nombre de Usuario</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText id="clave" value="soporte.hitss" disabled="true"/>
+                                        <label>Clave de Usuario</label>
+                                    </h:panelGroup>
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText id="correo" value="soporte.hitss@glolahitss.com" disabled="true"/>
+                                        <label>Correo</label>
+                                    </h:panelGroup>
+                                </p:panelGrid>
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                    <p:commandButton value="Confirmar" process="@form" icon="ui-icon-check" ajax="true"
+                                                     update="forma" onclick="$('html, body').animate({scrollTop: 0}, 600);">
+                                        <p:confirm header="Confirmar acción" message="¿Está seguro de realizar esta acción?" />
+                                    </p:commandButton>
+                                    <p:commandButton value="Cancelar" process="@this" icon="ui-icon-block" immediate="true" 
+                                                     ajax="false" update="forma"
+                                                     onclick="$('html, body').animate({scrollTop: 0}, 600);">
+                                        <p:resetInput target="forma" />
+                                    </p:commandButton>
+                                    <p:confirmDialog global="true">
+                                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+                                </p:panelGrid>
+                            </p:dialog>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

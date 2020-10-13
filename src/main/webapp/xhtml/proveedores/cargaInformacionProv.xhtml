@@ -1,0 +1,187 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Validar Cobro</ui:define>
+
+    <ui:define name="content">
+
+        <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Proveedores" url="#" style="color:blue;"/>
+    <p:menuitem value="Carga de Información" url="#" />
+    
+    
+</p:breadCrumb>
+        
+        
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                
+                $('table tr:eq(6) td:eq(8)').css({'background-color': 'red','color':'white'});
+                $('table tr:eq(6) td:eq(9)').css({'background-color':'red','color':'white'});
+                
+                $('table tr:eq(8) td:eq(8)').css({'color':'red'});
+                $('table tr:eq(8) td:eq(9)').css({'color':'red'});
+               
+               
+               
+               
+            });
+        </script>
+
+        
+        <style>
+            th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+             .ui-panelgrid td, .ui-panelgrid tr
+            {
+                border-style: none !important
+            }
+            .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+                background: #ffffff !important;
+                border-left: #ffffff !important;
+                border-right : #ffffff !important;
+            }
+            .ui-datatable-header.ui-widget-header.ui-corner-top{
+                border-left: #ffffff !important;
+                border-right : #ffffff !important;
+                border-top: #ffffff !important;
+                background-color: #ffffff;
+                text-align:right;
+                margin-right:0%;
+            }
+            body .ui-widget-content {
+
+                border: none;
+            }
+
+            body .ui-fileupload .ui-fileupload-buttonbar {
+                padding: 6px 12px;
+                border-bottom: 0 none;
+                border-left: 0 none;
+                border-right:0 none;
+                border-top: 0 none;
+            }
+
+            body .ui-datalist .ui-datalist-header {
+
+                padding: 6px 12px;
+
+            }
+            body  .ui-datalist .ui-datalist-header {
+                border-bottom: black !important;
+                border-left: black !important;
+                border-right:black !important;
+                border-top: black !important;
+            }
+
+             .ui-state-default.customHeaderGreen{
+                background-color:  green !important;
+            }
+
+            .ui-widget-content.ui-datatable-even .customTextBlue, .ui-widget-content.ui-datatable-odd .customTextBlue{
+                color:  #2236ef !important;
+            }
+            
+            .ui-widget-content.ui-datatable-even .customBackgroundRed, .ui-widget-content.ui-datatable-odd .customBackgroundRed{
+                background-color: red !important;
+            }
+            
+            .ui-widget-content.ui-datatable-even .customBackgroundWhite, .ui-widget-content.ui-datatable-odd .customBackgroundWhite{
+                background-color: #ffffff !important;
+            }
+            
+            
+            .ui-widget-content.ui-datatable-even .customTextRed{
+                color:  #d00e27 !important;
+            }
+            
+            
+        </style>
+        
+        
+        
+        
+
+        <div class="ui-g">
+            <div class="ui-g-12" style="text-align: right;">
+                <p:outputLabel value="Proveedor: ABCDEFGHKj "/>
+            </div>
+            <div class="ui-g-6">
+                 <h:outputLabel for="button1" value="Vigencia Del: " /><p:calendar id="button1" value="#{calendarView.date3}" showOn="button" />  <h:outputLabel for="button2" value=" Al: " /><p:calendar id="button2" value="#{calendarView.date3}" showOn="button" />
+            </div>
+            <div class="ui-g-3">
+                 <h:outputLabel for="Servicio" value="Servicio: " />
+                 <p:selectOneMenu id="Servicio" >   <f:selectItem itemLabel="SS7" itemValue="0" noSelectionOption="true" />
+                                                    <f:selectItem itemLabel="LTE DIAMETER" itemValue="1" />
+                                                    <f:selectItem itemLabel="GRX" itemValue="2" />
+                                                    <f:selectItem itemLabel="HM" itemValue="3" />
+                                                </p:selectOneMenu>
+                 
+            </div>
+           
+            <div class="ui-g-1"><p:commandButton type="button" value="Consultar" styleClass="blue-btn raised-btn rounded-btn"/></div>
+            <div class="ui-g-8 ui-lg-12">
+               
+                 <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                    sizeLimit="52428800" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
+                    cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Comparar"/>
+               
+            </div>    
+       
+        </div>      
+        <p:dataTable var="sale" value="#{dtGroupView.pData}" scrollable="true" scrollWidth="100%">
+            <p:column headerText="Roaming partner" width="250">
+                <h:outputText value="#{sale.roamingPartner}" />
+            </p:column>
+            <p:column headerText="Orig Country" >
+                <h:outputText value="#{sale.origCountry}" />
+            </p:column>
+            <p:column headerText="Dest Country" >
+                <h:outputText value="#{sale.destCountry}" />
+            </p:column>
+            <p:column headerText="ANSI Transactions" >
+                <h:outputText value="#{sale.ansiTrans}"/>
+            </p:column>
+            <p:column headerText="ITU Transactions">
+                <h:outputText value="#{sale.ituTrans}"/>
+            </p:column>
+            <p:column headerText="OTHER-SHARED RANGE" >
+                <h:outputText value="#{sale.otherSharedRange}" />
+            </p:column>
+            <p:column headerText="OTHER-NOT FOUND" >
+                <h:outputText value="#{sale.otherNotFound}" />
+            </p:column>
+            <p:column headerText="TOTAL MSUS" >
+                <h:outputText value="#{sale.totalMsus}" />
+            </p:column>
+            <p:column headerText="PROCESADOS FACTURADOR"  style="color: blue;" styleClass="customHeaderGreen ">
+                <h:outputText value="#{sale.procFacturador}" />
+            </p:column>
+            <p:column headerText="DIFERENCIA"  style="color: blue;" >
+                <h:outputText value="#{sale.dif}"/>
+            </p:column>    
+            
+        </p:dataTable>
+                 
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,281 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Proyecciones</ui:define>
+    <ui:define name="content">
+                <style type="text/css">
+th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+                    
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    
+   .celdaCentral{}
+    
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+            body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+
+                border: none;
+            }
+
+           .noHeader thead th { 
+        border: none !important; 
+        background: #ffffff !important;
+        height: 0px;
+        
+    }
+            .ui-datatable {
+                margin-bottom:20px;
+            }
+
+            .ui-datatable-frozenlayout-left {
+                width:20%;
+            }
+
+            .ui-datatable-frozenlayout-right {
+                width:80%;
+            }
+
+            .ui-state-default.customHeaderRed{
+                background-color:  red !important;
+            }
+            .ui-state-default.customHeaderYellow{
+                background-color: #e0e007 !important;
+            }
+            .ui-state-default.customHeaderGreen{
+                background-color:  green !important;
+            }
+
+            .ui-state-default.customHeaderCream{
+                background-color:  #e8f6c0 !important;
+                color:#000000 !important;
+                
+            }
+            .ui-state-default.customHeaderLightWhite{
+                background-color: #ffffff  !important;
+               
+                border-bottom-color: #ffffff  !important; 
+                border-top-color:#ffffff  !important;
+            }
+            
+            .ui-datatable table {
+                border-collapse: collapse;
+                width: 100%;
+                table-layout: auto;
+            }
+            
+        </style>
+        
+        
+        <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Proyecciones" url="#" />
+    <p:menuitem value="Proyección Unidades Histórico" url="#" />
+    
+</p:breadCrumb>
+
+        
+        
+        <h:form> 
+            <p:dataTable id="tbl" var="car" value="#{proyeccionBean.proyeccionesHistorico}" >
+
+                    <f:facet name="header">
+                        <div  style="text-align:right;">
+                            <h:commandLink>
+                                <p:graphicImage name="/demo/reports/excel-l.png"/>
+                                <p:dataExporter type="xls" target="tbl" fileName="Histórico" />
+                            </h:commandLink>
+                        </div>  
+                    </f:facet>
+                    <p:columnGroup type="header">
+                        
+                        <p:row>
+                            <p:column headerText="Zona" width="300" styleClass="customHeaderCream" />
+                            <p:column headerText="Ene-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Feb-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Mar-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Abr-17" styleClass="customHeaderCream" />
+                            <p:column headerText="May-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Jun-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Jul-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Ago-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Sep-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Oct-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Nov-17" styleClass="customHeaderCream" />
+                            <p:column headerText="Dic-17" styleClass="customHeaderCream" />
+                            
+                             <p:column headerText="Ene-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Feb-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Mar-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Abr-18" styleClass="customHeaderCream" />
+                             <p:column headerText="May-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Jun-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Jul-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Ago-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Sep-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Oct-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Nov-18" styleClass="customHeaderCream" />
+                             <p:column headerText="Dic-18" styleClass="customHeaderCream" />
+                             
+                            
+                            
+                            <p:column headerText="Ene-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Feb-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Mar-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Abr-19" styleClass="customHeaderCream" />
+                            <p:column headerText="May-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Jun-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Jul-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Ago-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Sep-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Oct-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Nov-19" styleClass="customHeaderCream" />
+                            <p:column headerText="Dic-19" styleClass="customHeaderCream" />
+                            
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column width="300">
+                        <h:outputText value="#{car.zona}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes1}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes2}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes3}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes4}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes5}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes6}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes7}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes8}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes9}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes10}" />
+                    </p:column>
+                     <p:column>
+                        <h:outputText value="#{car.mes11}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes12}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes13}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes14}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes15}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes16}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes17}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes18}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes19}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes20}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes21}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes22}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes23}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes24}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes25}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes26}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes27}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes28}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes29}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes30}" />
+                    </p:column>
+                     <p:column>
+                        <h:outputText value="#{car.mes31}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes32}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes33}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes34}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes35}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText value="#{car.mes36}" />
+                    </p:column>
+  
+                </p:dataTable>
+    </h:form>
+                
+         
+    </ui:define>
+  </ui:composition>      

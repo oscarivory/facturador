@@ -1,0 +1,76 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pv="http://primefaces.org/paradise">
+    
+    <div class="layout-menu-wrapper layout-menu-dark">
+        <div class="nano">
+            <div class="nano-content sidebar-scroll-content">
+                <div class="layout-menu-container">
+                    <h:form id="menuform">
+                        <div class="mobile-search">
+                            <i class="fa fa-fw fa-search topbar-search-icon"></i>
+                            <input type="text" class="topbar-search" placeholder="Type your search here"/>
+                        </div>
+                        <pv:menu>
+                            <p:menuitem id="pm_dashboard" value="Inicio" icon="fa fa-home" url="/facturadorAMX/faces/xhtml/inicio/inicio.xhtml"/>
+                            <p:submenu id="pm_menu" label="Filiales" icon="fa fa-address-book">
+                                <p:submenu id="pm_cont_f" label="Contratos" icon="fa fa-suitcase">
+                                    <p:menuitem id="pm_lcont_f" value="Listado de Contratos" icon="fa fa-list-alt" url="/facturadorAMX/faces/xhtml/contratos/listaContratos.xhtml" ajax="true"/>
+                                    <p:menuitem id="pm_lDB_f" value="Listado desde BD" icon="fa fa-list-alt" url="/facturadorAMX/faces/xhtml/contratos/listadesdeBD.xhtml" ajax="true"/>
+                                    <p:menuitem id="pm_ncont_f" value="Nuevo Contrato" icon="fa fa-plus-circle" url="/facturadorAMX/faces/xhtml/contratos/nuevoContrato.xhtml" ajax="true"/>
+                                </p:submenu>
+                                <p:submenu id="pm_f" label="Facturacion" icon="fa fa-tasks">
+                                    <p:submenu id="pm_t" label="Telcel" icon="fa fa-building">
+                                        <p:menuitem id="pm_tvf" value="Validación" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/validaFactura.xhtml" ajax="true"/>
+                                        <p:menuitem id="pm_tcf" value="Complementos" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/consultaFactura.xhtml" ajax="true"/>
+                                        <p:menuitem id="pmts_ef" value="Exportar a SAP" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/SAP.xhtml" ajax="true"/>
+                                        <p:menuitem id="pmts_cf" value="Cargar Facturas" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/cargarFacturas.xhtml" ajax="true"/>
+                                        <p:menuitem id="pmts_rf" value="Registrar Pago" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/registrarPago.xhtml" ajax="true"/>
+                                        <p:menuitem id="pmts_rn" value="Notas de Crédito " icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/RegistroNotas.xhtml" ajax="true"/>
+                                        <p:menuitem id="pmtsp_rn" value="Póliza Contable " icon="fa fa-chevron-right" url="#" ajax="true"/>
+                                    </p:submenu> 
+                                    <p:submenu id="pm_l" label="Latam" icon="fa fa-building">
+                                        <p:menuitem id="pm_lvf" value="Validación" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/latam/autorizacionLatam.xhtml" ajax="true"/>
+                                        <p:menuitem id="pm_lcf" value="Consultar Facturación" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/latam/consultarFacturacion.xhtml" ajax="true"/>
+                                        <p:menuitem id="pm_lcfd" value="Consultar Facturas" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/facturacion/latam/consultarFactura.xhtml" ajax="true"/>
+                                    </p:submenu>
+                                </p:submenu>
+                               <p:submenu id="pm_frep" label="Reportes" icon="fa fa-folder">
+                                     <p:menuitem id="pm_fss7" value="SS7" icon="fa fa-file-text" url="/facturadorAMX/faces/xhtml/reportes/generales/ReporteSs7.xhtml" ajax="false"/>
+                                     
+                                </p:submenu>
+                                <p:submenu id="proyUni" label="Proyecciones" icon="fa fa-line-chart">
+                                    <p:menuitem id="proyU" value="Unidades" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/proyecciones/vistaProyecciones.xhtml" ajax="false"/>
+                                    <p:menuitem id="proyc" value="Costos" icon="fa fa-chevron-right" url="/facturadorAMX/faces/xhtml/proyecciones/vistaProyeccionesCostos.xhtml" ajax="false"/>
+                                </p:submenu>
+                                 
+                            </p:submenu>
+                            <p:submenu id="pm_prov" label="Proveedores" icon="fa fa-handshake-o">
+                               <p:submenu id="pm_pcon" label="Contratos" icon="fa fa-suitcase">
+                                    <p:menuitem id="pbm_lcont_f" value="Listado de Contratos" icon="fa fa-list-alt" url="/facturadorAMX/faces/xhtml/contratos/listaContratos_p.xhtml" ajax="true"/>
+                                    <p:menuitem id="pbm_ncont_f" value="Nuevo Contrato" icon="fa fa-plus-circle" url="/facturadorAMX/faces/xhtml/contratos/nuevoContrato_p.xhtml" ajax="true"/>
+                                </p:submenu>
+                                <p:submenu id="pm_prep" label="Reportes" icon="fa fa-folder ">
+                                     <p:menuitem id="ppm_fss7" value="SS7" icon="fa fa-file-text" url="/facturadorAMX/faces/xhtml/reportes/generales/ReporteSs7_p.xhtml" ajax="false"/>
+                                </p:submenu>
+                                <p:menuitem id="pm_CI" value="Carga de información" icon="fa fa-file-text" url="/facturadorAMX/faces/xhtml/proveedores/cargaInformacionProv.xhtml" ajax="false"/>
+                            </p:submenu>
+                            <p:submenu id="pm_admon" label="Administracion" icon="fa fa-cogs">
+                                <p:menuitem id="pm_users" value="Usuarios" icon="fa fa-user-circle" url="#" ajax="false"/>
+                                <p:menuitem id="pm_perf" value="Perfiles" icon="fa fa-group" url="#" ajax="false"/>
+                                <p:submenu id="pm_cat" label="Catalogos" icon="fa fa-book">
+                                      <p:menuitem id="pm_cat1" value="Catalogo_n" icon="fa fa-chevron-right" url="#" ajax="false"/>
+                                </p:submenu>
+                            </p:submenu>
+                        </pv:menu>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ui:composition>

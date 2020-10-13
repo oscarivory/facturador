@@ -1,0 +1,65 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/paradise">
+   
+    
+    <style>
+        .labelTop {
+     margin-left: 25%;
+     border: 0 none; 
+     background-color: transparent; 
+    color: #ffffff; 
+    font-size: 20PX;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+     -webkit-transition: color 0.3s; 
+     transition: color 0.3s; 
+}
+    </style>
+    
+    
+    <div class="topbar">
+        <h:link  styleClass="topbar-logo">
+            <p:graphicImage name="images/america-movil-logo-bco.png" style="border: 0px;" library="paradise-layout" />
+        </h:link>
+         
+          
+        
+        <a href="#" id="menu-button">
+            <i class="fa fa-bars"></i>
+        </a>
+        <a href="#" id="user-display">
+            <span class="username">Admin001</span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+       
+        <ul id="topbar-menu" class="fadeInDown animated">
+            <li>
+                <a href="#">
+                     <a href="#">
+                            <i class="fa fa-fw fa-sign-out"></i>
+                            <span>Salir</span>
+                        </a>
+                    
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="topbar-icon fa fa-fw fa-bell-o"></i>
+                    <span class="topbar-item-name">Notifications</span>
+                    <span class="topbar-badge animated rubberBand">2</span>
+                </a>
+            </li>
+        </ul>
+        <label>
+            <output  class="labelTop"  id="topbar-search" >FACTURADOR ROAMING </output>
+        </label>
+         
+        
+        
+    </div>
+</ui:composition>

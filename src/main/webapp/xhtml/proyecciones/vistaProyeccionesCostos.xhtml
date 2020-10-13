@@ -1,0 +1,307 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Proyecciones</ui:define>
+    <ui:define name="content">
+                <style type="text/css">
+th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+                    
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    
+   .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+            body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+
+                border: none;
+            }
+
+           .noHeader thead th { 
+        border: none !important; 
+        background: #ffffff !important;
+        height: 0px;
+        
+    }
+            .ui-datatable {
+                margin-bottom:20px;
+            }
+
+            .ui-datatable-frozenlayout-left {
+                width:20%;
+            }
+
+            .ui-datatable-frozenlayout-right {
+                width:80%;
+            }
+
+            .ui-state-default.customHeaderRed{
+                background-color:  red !important;
+            }
+            .ui-state-default.customHeaderYellow{
+                background-color: #e0e007 !important;
+            }
+            .ui-state-default.customHeaderGreen{
+                background-color:  green !important;
+            }
+
+            .ui-state-default.customHeaderCream{
+                background-color:  #dcf2f2 !important;
+                color:#000000 !important;
+                
+            }
+            .ui-state-default.customHeaderLightWhite{
+                background-color: #ffffff  !important;
+               
+                border-bottom-color: #ffffff  !important; 
+                border-top-color:#ffffff  !important;
+            }
+            
+            .ui-datatable table {
+                border-collapse: collapse;
+                width: 100%;
+                table-layout: auto;
+            }
+            
+        </style>
+        
+        
+        <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Proyecciones" url="#" />
+    <p:menuitem value="Proyección Costos" url="#" />
+</p:breadCrumb>
+
+        <div class="ui-g card card-w-title c-ligth">
+            <div class="ui-g-1"><p:outputLabel for="apl" value="Servicio"/>
+            </div>
+            <div class="ui-g-3">
+                <p:selectOneMenu id="apl" >
+                    <f:selectItem itemLabel="SS7" itemValue="0"  />
+                    <f:selectItem itemLabel="LTE DIAMETER" itemValue="1" />
+                    <f:selectItem itemLabel="GRX" itemValue="2" />
+                    <f:selectItem itemLabel="HMTA" itemValue="3" />
+                </p:selectOneMenu>
+            </div>
+            <div class="ui-g-1"><p:outputLabel for="tot" value="Tipo"/>
+            </div>
+            <div class="ui-g-3">
+                <p:selectOneMenu id="tot" >
+                    <f:selectItem itemLabel="FILIAL" itemValue="0"  />
+                    <f:selectItem itemLabel="TOTALIZADO" itemValue="1" />
+                </p:selectOneMenu>
+            </div>
+             <div class="ui-g-1">
+                 <p:linkButton outcome="vistaProyeccionesCostosHistorico" value="Histórico" icon="pi pi-star" style="margin-right:20px;"/>
+            </div>
+        </div>
+        
+        
+        <h:form> 
+                <p:dataTable id="tbl" var="car" value="#{proyeccionBean.proyeccionesFiliales}" >
+
+                    <f:facet name="header">
+                        <div  style="text-align:right;">
+                            <h:commandLink>
+                                <p:graphicImage name="/demo/reports/excel-l.png"/>
+                                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+                            </h:commandLink>
+                        </div>  
+                    </f:facet>
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column colspan="4" styleClass="customHeaderCream" headerText="Costos Filiales" />
+                            <p:column colspan="1" styleClass="customHeaderLightWhite"/>
+                            <p:column colspan="5" styleClass="customHeaderCream" headerText="Proyección" />
+                            <p:column colspan="1" styleClass="customHeaderLightWhite"/>
+                            <p:column colspan="2" styleClass="customHeaderCream" headerText="2020" />
+                           
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Filial" width="300" styleClass="customHeaderCream" />
+                            <p:column headerText="2017" styleClass="customHeaderCream" />
+                            <p:column headerText="2018" styleClass="customHeaderCream" />
+                            <p:column headerText="2019" styleClass="customHeaderCream" />
+                            <p:column styleClass="customHeaderLightWhite"/>
+                            <p:column headerText="2020" styleClass="customHeaderCream"/>
+                            <p:column headerText="2021" styleClass="customHeaderCream"/>
+                            <p:column headerText="2022" styleClass="customHeaderCream"/>
+                            <p:column headerText="2023" styleClass="customHeaderCream"/>
+                            <p:column headerText="2024" styleClass="customHeaderCream"/>
+                            <p:column styleClass="customHeaderLightWhite"/>
+                            <p:column headerText="Real" styleClass="customHeaderCream"/>
+                            <p:column headerText="%Var" styleClass="customHeaderCream"/>
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column>
+                        <h:outputText value="#{car.zona}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio1}" > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio2}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio3}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+                    <p:column colspan="1" style="border-bottom-color: #ffffff  !important;"/>
+                    <p:column>
+                        <h:outputText value="#{car.anio4}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio5}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio6}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio7}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio8}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+<p:column colspan="1" style="border-bottom-color: #ffffff  !important;"/>
+                    <p:column>
+                        
+                        <h:outputText value="#{car.anio9}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+<p:column>
+                        
+                        <h:outputText value="#{car.varPor}" />
+                    </p:column>
+
+
+<p:columnGroup type="footer">
+                <p:row>
+                    <p:column footerText="Totals: " style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$1345.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$3245.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$3435.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column style="border-bottom-color: #ffffff  !important;"/>
+                    <p:column footerText="$3345.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$3425.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$5445.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$9545.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="$7345.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column style="border-bottom-color: #ffffff  !important;"     />
+                    <p:column footerText="$345.00" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                    <p:column footerText="10" style="text-align:right; background-color: #2c4053 !important; color:white;"/>
+                </p:row>
+            </p:columnGroup>
+
+
+                </p:dataTable>
+    </h:form>
+        <h:form>
+        <p:dataTable id="tbl" var="car" value="#{proyeccionBean.proyeccionesFilialesTot}" >
+
+                    <p:columnGroup type="header">
+                        <p:row>
+                            <p:column colspan="4" styleClass="customHeaderCream" headerText="Costos Totales" />
+                            <p:column colspan="1" styleClass="customHeaderLightWhite"/>
+                            <p:column colspan="5" styleClass="customHeaderCream" headerText="Proyección" />
+                            <p:column colspan="1" styleClass="customHeaderLightWhite"/>
+                            <p:column colspan="2" styleClass="customHeaderCream" headerText="2020" />
+                           
+                        </p:row>
+                        <p:row>
+                            <p:column headerText="Filial" width="300" styleClass="customHeaderCream" />
+                            <p:column headerText="2017" styleClass="customHeaderCream" />
+                            <p:column headerText="2018" styleClass="customHeaderCream" />
+                            <p:column headerText="2019" styleClass="customHeaderCream" />
+                            <p:column styleClass="customHeaderLightWhite"/>
+                            <p:column headerText="2020" styleClass="customHeaderCream"/>
+                            <p:column headerText="2021" styleClass="customHeaderCream"/>
+                            <p:column headerText="2022" styleClass="customHeaderCream"/>
+                            <p:column headerText="2023" styleClass="customHeaderCream"/>
+                            <p:column headerText="2024" styleClass="customHeaderCream"/>
+                            <p:column styleClass="customHeaderLightWhite"/>
+                            <p:column headerText="Real" styleClass="customHeaderCream"/>
+                            <p:column headerText="%Var" styleClass="customHeaderCream"/>
+                        </p:row>
+                    </p:columnGroup>
+                    <p:column>
+                        <h:outputText value="#{car.zona}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio1}" > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio2}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio3}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+                    <p:column colspan="1" style="border-bottom-color: #ffffff  !important;"/>
+                    <p:column>
+                        <h:outputText value="#{car.anio4}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio5}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio6}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio7}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="#{car.anio8}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+<p:column colspan="1" style="border-bottom-color: #ffffff  !important;"/>
+                    <p:column>
+                        
+                        <h:outputText value="#{car.anio9}"  > <f:convertNumber type="currency" currencySymbol="$" /></h:outputText>
+                    </p:column>
+<p:column>
+                        
+                        <h:outputText value="#{car.varPor}" />
+                    </p:column>
+
+
+
+                </p:dataTable>
+         </h:form>
+    </ui:define>
+  </ui:composition>      

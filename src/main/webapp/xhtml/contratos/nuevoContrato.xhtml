@@ -1,0 +1,1522 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                template="/WEB-INF/template.xhtml">
+    
+    <ui:define name="content">
+         <h:outputScript library="paradise-layout" name="js/calendar_es.js" target="head"/>
+        <p:breadCrumb>
+            <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+            <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+            <p:menuitem value="Contratos" url="#" />
+            <p:menuitem value="Nuevo Contrato" url="#" />
+
+        </p:breadCrumb>
+        
+        
+        
+        <style type="text/css">
+            
+                    th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+            
+            
+            .ui-panelgrid td, .ui-panelgrid tr
+            {
+                border-style: none !important
+            }
+            .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+                background: #ffffff !important;
+                border-left: #ffffff !important;
+                border-right : #ffffff !important;
+            }
+            .ui-datatable-header.ui-widget-header.ui-corner-top{
+                border-left: #ffffff !important;
+                border-right : #ffffff !important;
+                border-top: #ffffff !important;
+                background-color: #ffffff;
+                text-align:right;
+                margin-right:0%;
+            }
+            body .ui-widget-content {
+
+                border: none;
+            }
+
+            body .ui-fileupload .ui-fileupload-buttonbar {
+                padding: 6px 12px;
+                border-bottom: 0 none;
+                border-left: 0 none;
+                border-right:0 none;
+                border-top: 0 none;
+            }
+
+            body .ui-datalist .ui-datalist-header {
+
+                padding: 6px 12px;
+
+            }
+            body  .ui-datalist .ui-datalist-header {
+                border-bottom: black !important;
+                border-left: black !important;
+                border-right:black !important;
+                border-top: black !important;
+            }
+
+
+        </style>   
+        <p:growl id="msgs" showDetail="true"/>
+
+        <div class="ui-g-12">
+            <div class="card card-w-title">
+
+
+
+
+
+
+
+
+                <p:tabView>
+                    <p:tab title="Generales">
+                        <h:form id="form"> 
+
+                            <div class="ui-g card card-w-title c-ligth">
+                                <div class="ui-g-2 ui-md-2"><h:outputLabel for="noE1" value="No. De Contrato:  " /><h:outputLabel id="noE1" style="color: #3fb839">EMBM1234</h:outputLabel></div>
+                                <div class="ui-g-4"></div>
+                                <div class="ui-g-2 ui-md-2"><h:outputLabel for="esE12" value="Estatus:  " /><h:outputLabel id="esE12" style="color: #3fb839">EN PROCESO</h:outputLabel></div>
+                            </div>
+
+                            <div class="ui-g card card-w-title c-ligth">
+                                <div class="ui-g-12"><h:outputLabel for="N_Empresa" value="Nombre de la empresa: " /><p:inputText id="N_Empresa" /></div>
+                                <div class="ui-g-12"><h:outputLabel for="R_Social1" value="Razon Social: " /><p:inputText id="R_Social1" /></div>
+                                <div class="ui-g-12"><h:outputLabel for="button1" value="Vigencia Del: " /><p:calendar id="button1" value="#{calendarView.date3}" showOn="button" />  <h:outputLabel for="button2" value=" Al: " /><p:calendar id="button2" value="#{calendarView.date3}" showOn="button" /></div>
+                                <div class="ui-g-12"><h:outputLabel for="variacion" value="Variación Tolerada %: " /><p:inputText id="variacion" /></div>
+                                <div class="ui-g-12"><h:outputLabel for="plazo" value="Plazo Para pago: " /><p:inputText id="plazo" /><h:outputLabel for="interes" value=" dias. Interés sobre pago vencido %: " /><p:inputText id="interes" /></div>
+                                <div class="ui-g-12"><h:outputLabel for="ch" value="Renovacion Mensual: " /><p:selectBooleanCheckbox id="ch" value="#{selectBooleanView.value1}"/></div>
+                                <div class="ui-g-12"><h:outputLabel for="apl" value="Zona/País aplicación: " />
+                                    <p:selectOneMenu id="apl" >
+                                                    <f:selectItem itemLabel="Seleccionar" itemValue="0" noSelectionOption="true" />
+                                                    <f:selectItem itemLabel="México" itemValue="1" />
+                                                    <f:selectItem itemLabel="Argentina" itemValue="2" />
+                                                    <f:selectItem itemLabel="Brasil" itemValue="3" />
+                                                </p:selectOneMenu>
+                                </div>
+                            </div>
+                             
+ 
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12" style="text-align:center">                                
+                                    
+                                    <p:commandButton type="button" value="Autorizar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                                    <p:commandButton type="button" value="Guardar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                                    <p:commandButton type="button" value="Terminar Registro" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                                    <p:commandButton type="button" value="Eliminar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                                    <p:commandButton type="button" value="Cancelar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </p:tab>
+                    <p:tab title="Condiciones de Facturación">
+
+                        <div class="ui-fluid" >
+                            <div class="ui-g" >
+                                <div class="ui-g-12">
+                                    <h:form id="forma" prependId="false">                
+
+                                       <div class="ui-g  card card-w-title c-ligth" >
+                            <div class="ui-g-2"><h:outputLabel for="no34" value="No. De Contrato:  " /><h:outputLabel id="no34" style="color: #3fb839">EMBM1234</h:outputLabel></div>
+                            <div class="ui-g-4"></div>
+                            <div class="ui-g-2"><h:outputLabel for="esE34" value="Estatus:  " /><h:outputLabel id="esE34" style="color: #3fb839">EN PROCESO</h:outputLabel></div>
+                            <div class="ui-g-12">
+                                <p:outputLabel for="tipo" value="Tipo:" />
+                                                <p:selectOneMenu id="tipo" value="#{inicio.tipo}">
+                                                    <p:ajax listener="#{inicio.actualizaForm()}" update="forma" process="@this" />
+                                                    <f:selectItem itemLabel="Selecciona un Tipo" itemValue="0" noSelectionOption="true" />
+                                                    <f:selectItem itemLabel="Tarifa fija por unidad" itemValue="1" />
+                                                    <f:selectItem itemLabel="Tiers" itemValue="2" />
+                                                    <f:selectItem itemLabel="Bundled" itemValue="3" />
+                                                    <f:selectItem itemLabel="Monto fijo por Servicio" itemValue="4" />
+                                                    <f:selectItem itemLabel="Monto fijo por Servicio mas excedente" itemValue="5" />
+                                                    <f:selectItem itemLabel="Tiers mas excedente" itemValue="6" />
+                                                </p:selectOneMenu>
+                            </div>
+                        </div>
+
+                                       
+                                        <div class="card card-w-title">
+
+                                            <p:panel id="uno" rendered="#{inicio.ctrl.panelGridUno}" style="border: none !important;">
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="b1" value="MSU's SS7: "/> <p:selectBooleanCheckbox id="b1" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t1" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="ab1" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-elements">
+                                                            <f:selectItem itemLabel="ITU" itemValue="ITU" />
+                                                            <f:selectItem itemLabel="ANSI" itemValue="ANSI" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxaa2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkb2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="b2" value="LTE DIAMITER: "/> <p:selectBooleanCheckbox id="b2" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t2" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkbox2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chk2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style=" background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="b3" value="GRX MBsps: "/> <p:selectBooleanCheckbox id="b3" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t3" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chk3" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h4>CLASE DE SERVICIO</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="5">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">AF:</span>
+                                                                <p:inputText id="T4" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">BE:</span>
+                                                                <p:inputText id="T5" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">EF:</span>  
+                                                                <p:inputText id="T6" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h4>PORCENTAJE DE CLASES</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="T7" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <p:selectManyCheckbox id="basic" value="#{checkboxView.selectedConsoles}">
+                                                                <f:selectItem itemLabel="AF" itemValue="AF" />
+                                                                <f:selectItem itemLabel="BE" itemValue="BE" />
+                                                                <f:selectItem itemLabel="EF" itemValue="EF" />
+                                                            </p:selectManyCheckbox>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="n2" value="HMTA Monitoreo: "/><p:selectBooleanCheckbox id="n2" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="n2n" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxn2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="MSU's SS7" itemValue="SS7" />
+                                                            <f:selectItem itemLabel="LTE DIAMETER" itemValue="diamiter" />
+                                                            <f:selectItem itemLabel="GTPC" itemValue="GTPC" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkn2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+
+                                                <p:panelGrid columns="3" columnClasses="ui-g-4,ui-g-4,ui-g-4" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >COSTOS ADICIONALES</f:facet>
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h:form id="formaAd1">
+
+                                                            <p:dataTable id="adicionales1" widgetVar="adicionales1" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                                                                <f:facet name="header">
+                                                                    <p:commandButton icon="fa fa-plus" styleClass="ui-priority-primary" process="@this"
+                                                                                     action="#{bAdicionales.onAddNew()}" oncomplete="PF('adicionales1').addRow();" />
+                                                                </f:facet>
+
+                                                                <p:column headerText="Descripción">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column> 
+                                                                <p:column headerText="Costo(USD)">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+                                                                <p:column style="width:32px">
+                                                                    <p:rowEditor />
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </h:form>
+
+                                                    </p:panelGrid>            
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+
+
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >PERIODO DE EXCEPCION</f:facet>
+                                                </p:panelGrid>
+                                            </p:panel>
+
+                                            <p:panel id="dos" rendered="#{inicio.ctrl.panelGridDos}" style="border: none !important;">
+                                                <p:panelGrid columns="2" columnClasses="ui-g-7,ui-g-5" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:panelGrid columns="1"></p:panelGrid>
+                <p:panelGrid columns="1">
+                    <p:outputLabel value="*LAS TARIFAS NO INCLUYEN IMPUESTOS"/>
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:panelGrid columns="2" columnClasses="ui-g-7,ui-g-5" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:panelGrid  columns="1">
+                    <h:form id="formass7m">
+                        <p:dataTable id="ss7m" widgetVar="ss7" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column colspan="4" headerText="MSU's SS7" />
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <f:facet name="header">
+                                            <p:outputLabel for="a8m" value="Entrante: "/> <p:selectBooleanCheckbox id="a8m" />
+                                            <p:outputLabel for="a9m" value="Saliente: "/> <p:selectBooleanCheckbox id="a9m" />
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column headerText="Rango" />
+                                    <p:column headerText="Tarifa" />
+                                    <p:column headerText="Costo Maximo a pagar" />
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <p:commandButton icon="fa fa-plus" process="@this"  action="#{bAdicionales.onAddNew()}" oncomplete="PF('ss7').addRow();" />
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column> 
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                    <p:panelGrid >
+                    <p:selectManyCheckbox id="ss7im" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-elements">
+                        <f:selectItem itemLabel="ITU" itemValue="ITU" />
+                        <f:selectItem itemLabel="ANSI" itemValue="ANSI" />
+                    </p:selectManyCheckbox>
+                </p:panelGrid>
+                <p:panelGrid></p:panelGrid>    
+                <p:panelGrid></p:panelGrid> 
+                <p:panelGrid >
+                    <p:selectManyCheckbox id="ss7cm" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                        <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                        <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                    </p:selectManyCheckbox>
+                </p:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:panelGrid columns="2" columnClasses="ui-g-7,ui-g-5" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:panelGrid  columns="1">
+                    <h:form id="formalte">
+                        <p:dataTable id="ltem" widgetVar="lte" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column colspan="4" headerText="LTE DIAMETER" />
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="4">
+                                        <f:facet name="header">
+                                            <p:outputLabel for="a8" value="Entrante: "/> <p:selectBooleanCheckbox id="a8" />
+                                            <p:outputLabel for="a9" value="Saliente: "/> <p:selectBooleanCheckbox id="a9" />
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column headerText="Rango" />
+                                    <p:column headerText="Tarifa" />
+                                    <p:column headerText="Costo Maximo a pagar" />
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <p:commandButton icon="fa fa-plus" process="@this"  action="#{bAdicionales.onAddNew()}" oncomplete="PF('lte').addRow();" />
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+
+                            </p:columnGroup>
+
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column> 
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                    
+                <p:panelGrid >
+                    <p:selectManyCheckbox id="ltecm" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                        <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                        <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                    </p:selectManyCheckbox>
+                </p:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:panelGrid columns="2" columnClasses="ui-g-7,ui-g-5" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:panelGrid  columns="1">
+                    <h:form id="formagrxm">
+                        <p:dataTable id="grxm" widgetVar="grx" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column colspan="4" headerText="GRX Mbps" />
+                                </p:row>
+                                <p:row>
+                                    <p:column headerText="Rango" />
+                                    <p:column headerText="Tarifa" />
+                                    <p:column headerText="Costo Maximo a pagar" />
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <p:commandButton icon="fa fa-plus" process="@this"  action="#{bAdicionales.onAddNew()}" oncomplete="PF('grx').addRow();" />
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+
+                            </p:columnGroup>
+
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column> 
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                    
+                <p:panelGrid >
+                    <p:selectManyCheckbox id="grxcm" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                        <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                        <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                    </p:selectManyCheckbox>
+                </p:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:panelGrid columns="2" columnClasses="ui-g-7,ui-g-5" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:panelGrid  columns="1">
+                    <h:form id="formahmtam">
+                        <p:dataTable id="hmtam" widgetVar="hmta" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                            <p:columnGroup type="header">
+                                <p:row>
+                                    <p:column colspan="4" headerText="HMTA Monitoreo" />
+                                </p:row>
+                                <p:row>
+                                    <p:column headerText="Rango" />
+                                    <p:column headerText="Tarifa" />
+                                    <p:column headerText="Costo Maximo a pagar" />
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <p:commandButton icon="fa fa-plus" process="@this"  action="#{bAdicionales.onAddNew()}" oncomplete="PF('hmta').addRow();" />
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column> 
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column>
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </p:panelGrid>
+                <p:panelGrid columns="1">
+                <p:panelGrid>
+                    <p:selectManyCheckbox id="hmtachm" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                        <f:selectItem itemLabel="MSU's SS7" itemValue="SS7" />
+                        <f:selectItem itemLabel="LTE DIAMETER" itemValue="diamiter" />
+                        <f:selectItem itemLabel="GTPC" itemValue="GTPC" />
+                    </p:selectManyCheckbox>
+                </p:panelGrid>    
+                <p:panelGrid>
+                    <p:selectManyCheckbox id="hmtacm" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                        <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                        <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                    </p:selectManyCheckbox>
+                </p:panelGrid>
+                </p:panelGrid>
+            </p:panelGrid>
+            <p:panelGrid columns="3" columnClasses="ui-g-4,ui-g-4,ui-g-4" layout="grid" 
+                         styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                <f:facet name="header" >COSTOS ADICIONALES</f:facet>
+
+                <p:panelGrid columns="1"></p:panelGrid>
+
+                <p:panelGrid columns="1">
+                    <h:form id="formaAd2m">
+
+                        <p:dataTable id="adicionales2m" widgetVar="adicionales2" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                            <f:facet name="header">
+                                <p:commandButton icon="fa fa-plus" styleClass="ui-priority-primary" process="@this"
+                                                 action="#{bAdicionales.onAddNew()}" oncomplete="PF('adicionales2').addRow();" />
+                            </f:facet>
+
+                            <p:column headerText="Descripción">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column> 
+                            <p:column headerText="Costo(USD)">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                    <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="width:32px">
+                                <p:rowEditor />
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                </p:panelGrid>            
+
+                <p:panelGrid columns="1"></p:panelGrid>
+
+
+
+            </p:panelGrid>
+
+
+
+
+
+
+            <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                         styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                <f:facet name="header" >PERIODO DE EXCEPCION</f:facet>
+            </p:panelGrid>
+                                            </p:panel>
+                                            
+                                            
+                                            <p:panel id="tres" rendered="#{inicio.ctrl.panelGridTres}" style="border: none !important;">
+                                                <p:panelGrid columns="6" columnClasses="ui-g-7,ui-g-4" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">TARIFA BASE</span>  
+                                                                <p:inputText id="h23" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:outputLabel value="*LAS TARIFAS NO INCLUYEN IMPUESTOS"/>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="12" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ba1" value="MSU's SS7: "/> <p:selectBooleanCheckbox id="ba1" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <p:outputLabel for="ta1" value="Mensajes: "/><p:inputText id="ta1" size="15" />
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <p:outputLabel for="tn1" value="Incluye SS7,LTE "/><p:selectBooleanCheckbox id="tn1" />
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="ba2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-elements">
+                                                            <f:selectItem itemLabel="ITU" itemValue="ITU" />
+                                                            <f:selectItem itemLabel="ANSI" itemValue="ANSI" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkbox" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkba2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE41" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ab2" value="LTE DIAMITER: "/> <p:selectBooleanCheckbox id="ab2" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t2" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxa2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chka2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t4E1" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style=" background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ba3" value="GRX MBsps: "/> <p:selectBooleanCheckbox id="ba3" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="ta3" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chka3" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h4>CLASE DE SERVICIO</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="5">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">AF:</span>
+                                                                <p:inputText id="Ta4" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">BE:</span>
+                                                                <p:inputText id="Ta5" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">EF:</span>  
+                                                                <p:inputText id="Ta6" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h4>PORCENTAJE DE CLASES</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="Ta7" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <p:selectManyCheckbox id="basic1" value="#{checkboxView.selectedConsoles}">
+                                                                <f:selectItem itemLabel="AF" itemValue="AF" />
+                                                                <f:selectItem itemLabel="BE" itemValue="BE" />
+                                                                <f:selectItem itemLabel="EF" itemValue="EF" />
+                                                            </p:selectManyCheckbox>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE4" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="naa2" value="HMTA Monitoreo: "/><p:selectBooleanCheckbox id="naa2" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="na2n" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxna2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="MSU's SS7" itemValue="SS7" />
+                                                            <f:selectItem itemLabel="LTE DIAMETER" itemValue="diamiter" />
+                                                            <f:selectItem itemLabel="GTPC" itemValue="GTPC" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkna2" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE4" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="3" columnClasses="ui-g-4,ui-g-4,ui-g-4" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >COSTOS ADICIONALES</f:facet>
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h:form id="formaAd2">
+
+                                                            <p:dataTable id="adicionales2" widgetVar="adicionales2" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                                                                <f:facet name="header">
+                                                                    <p:commandButton icon="fa fa-plus" styleClass="ui-priority-primary" process="@this"
+                                                                                     action="#{bAdicionales.onAddNew()}" oncomplete="PF('adicionales2').addRow();" />
+                                                                </f:facet>
+
+                                                                <p:column headerText="Descripción">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column> 
+                                                                <p:column headerText="Costo(USD)">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+                                                                <p:column style="width:32px">
+                                                                    <p:rowEditor />
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </h:form>
+
+                                                    </p:panelGrid>            
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+
+
+                                                </p:panelGrid>
+
+
+
+
+
+
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >PERIODO DE EXCEPCION</f:facet>
+                                                </p:panelGrid>
+                                            </p:panel>
+                                            <p:panel id="cuatro" rendered="#{inicio.ctrl.panelGridCuatro}" style="border: none !important;">
+                                                <p:panelGrid columns="2" columnClasses="ui-g-8,ui-g-4" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="4">
+
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:outputLabel value="*LAS TARIFAS NO INCLUYEN IMPUESTOS"/>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="6" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-6 ui-md-3" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ba14" value="MSU's SS7: "/> <p:selectBooleanCheckbox id="ba14" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="ta14" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="ba24" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-elements">
+                                                            <f:selectItem itemLabel="ITU" itemValue="ITU" />
+                                                            <f:selectItem itemLabel="ANSI" itemValue="ANSI" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkbox4" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkba24" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE414" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ab24" value="LTE DIAMITER: "/> <p:selectBooleanCheckbox id="ab24" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t24" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxa24" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chka24" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t4E14" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style=" background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ba34" value="GRX MBsps: "/> <p:selectBooleanCheckbox id="ba34" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="ta34" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chka34" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h4>CLASE DE SERVICIO</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="5">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">AF:</span>
+                                                                <p:inputText id="Ta44" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">BE:</span>
+                                                                <p:inputText id="Ta54" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">EF:</span>  
+                                                                <p:inputText id="Ta64" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h4>PORCENTAJE DE CLASES</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="Ta74" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <p:selectManyCheckbox id="basic14" value="#{checkboxView.selectedConsoles}">
+                                                                <f:selectItem itemLabel="AF" itemValue="AF" />
+                                                                <f:selectItem itemLabel="BE" itemValue="BE" />
+                                                                <f:selectItem itemLabel="EF" itemValue="EF" />
+                                                            </p:selectManyCheckbox>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE44" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="naa24" value="HMTA Monitoreo: "/><p:selectBooleanCheckbox id="naa24" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="na2n4" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxna24" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="MSU's SS7" itemValue="SS7" />
+                                                            <f:selectItem itemLabel="LTE DIAMETER" itemValue="diamiter" />
+                                                            <f:selectItem itemLabel="GTPC" itemValue="GTPC" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkna24" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE44" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+
+                                                <p:panelGrid columns="3" columnClasses="ui-g-4,ui-g-4,ui-g-4" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >COSTOS ADICIONALES</f:facet>
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h:form id="formaAd3">
+
+                                                            <p:dataTable id="adicionales3" widgetVar="adicionales3" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                                                                <f:facet name="header">
+                                                                    <p:commandButton icon="fa fa-plus" styleClass="ui-priority-primary" process="@this"
+                                                                                     action="#{bAdicionales.onAddNew()}" oncomplete="PF('adicionales3').addRow();" />
+                                                                </f:facet>
+
+                                                                <p:column headerText="Descripción">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column> 
+                                                                <p:column headerText="Costo(USD)">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+                                                                <p:column style="width:32px">
+                                                                    <p:rowEditor />
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </h:form>
+
+                                                    </p:panelGrid>            
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+
+
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >PERIODO DE EXCEPCION</f:facet>
+                                                </p:panelGrid>
+                                            </p:panel>
+                                            <p:panel id="cinco" rendered="#{inicio.ctrl.panelGridCinco}" style="border: none !important;">
+                                                <p:panelGrid columns="2" columnClasses="ui-g-8,ui-g-4" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="4">
+
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:outputLabel value="*LAS TARIFAS NO INCLUYEN IMPUESTOS"/>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="6" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-2" styleClass="card card-w-title c-ligth" layout="grid">
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ba145" value="MSU's SS7: "/> <p:selectBooleanCheckbox id="ba145" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="ta145" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="ba245" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-elements">
+                                                            <f:selectItem itemLabel="ITU" itemValue="ITU" />
+                                                            <f:selectItem itemLabel="ANSI" itemValue="ANSI" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkbox45" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkba245" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE4145" size="15" placeholder="$ UNIDAD EXCEDENTE"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ab245" value="LTE DIAMITER: "/> <p:selectBooleanCheckbox id="ab245" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t24" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxa245" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="Entrantes" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="Salientes" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chka245" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="t4E145" size="15" placeholder="$ MONTO FIJO"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style=" background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="ba345" value="GRX MBsps: "/> <p:selectBooleanCheckbox id="ba345" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="ta345" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chka345" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h4>CLASE DE SERVICIO</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="5">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">AF:</span>
+                                                                <p:inputText id="Ta445" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">BE:</span>
+                                                                <p:inputText id="Ta545" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <div class="ui-inputgroup" >
+                                                                <span class="ui-inputgroup-addon">EF:</span>  
+                                                                <p:inputText id="Ta645" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h4>PORCENTAJE DE CLASES</h4>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="2">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="Ta745" size="10" />
+                                                                <span class="ui-inputgroup-addon">%</span>  
+                                                            </div>
+                                                            <p:selectManyCheckbox id="basic145" value="#{checkboxView.selectedConsoles}">
+                                                                <f:selectItem itemLabel="AF" itemValue="AF" />
+                                                                <f:selectItem itemLabel="BE" itemValue="BE" />
+                                                                <f:selectItem itemLabel="EF" itemValue="EF" />
+                                                            </p:selectManyCheckbox>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE445" size="15" placeholder="$ UNIDAD EXCEDENTE"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                                    <p:panelGrid  columns="2">
+                                                        <p:outputLabel for="naa245" value="HMTA Monitoreo: "/><p:selectBooleanCheckbox id="naa245" /> 
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="na2n45" size="15" placeholder="$"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkboxna245" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="MSU's SS7" itemValue="SS7" />
+                                                            <f:selectItem itemLabel="LTE DIAMETER" itemValue="diamiter" />
+                                                            <f:selectItem itemLabel="GTPC" itemValue="GTPC" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <p:selectManyCheckbox id="chkna245" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                                            <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                                            <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                                        </p:selectManyCheckbox>
+                                                    </p:panelGrid>
+                                                    <p:panelGrid columns="1">
+                                                        <h:form>
+                                                            <div class="ui-inputgroup" >
+                                                                <p:inputText id="tE445" size="15" placeholder="$ UNIDAD EXCEDENTE"/>
+                                                                <span class="ui-inputgroup-addon">USD</span>  
+                                                            </div>
+                                                        </h:form>
+                                                    </p:panelGrid>
+                                                </p:panelGrid>
+
+                                                <p:panelGrid columns="5" columnClasses="ui-g-4,ui-g-4,ui-g-4" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >COSTOS ADICIONALES</f:facet>
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+                                                    <p:panelGrid columns="1">
+                                                        <h:form id="formaAd4">
+
+                                                            <p:dataTable id="adicionales4" widgetVar="adicionales4" var="ad" value="#{bAdicionales.adicionales}" editable="true">
+                                                                <f:facet name="header">
+                                                                    <p:commandButton icon="fa fa-plus" styleClass="ui-priority-primary" process="@this"
+                                                                                     action="#{bAdicionales.onAddNew()}" oncomplete="PF('adicionales4').addRow();" />
+                                                                </f:facet>
+
+                                                                <p:column headerText="Descripción">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.descripcion}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.descripcion}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column> 
+                                                                <p:column headerText="Costo(USD)">
+                                                                    <p:cellEditor>
+                                                                        <f:facet name="output"><h:outputText value="#{ad.costo}" /></f:facet>
+                                                                        <f:facet name="input"><p:inputText value="#{ad.costo}" style="width:100%"/></f:facet>
+                                                                    </p:cellEditor>
+                                                                </p:column>
+                                                                <p:column style="width:32px">
+                                                                    <p:rowEditor />
+                                                                </p:column>
+                                                            </p:dataTable>
+                                                        </h:form>
+
+                                                    </p:panelGrid>            
+
+                                                    <p:panelGrid columns="1"></p:panelGrid>
+
+
+
+                                                </p:panelGrid>
+                                                <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                             styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                                    <f:facet name="header" >PERIODO DE EXCEPCION</f:facet>
+                                                </p:panelGrid>
+                                            </p:panel>
+
+
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p:tab>
+                    <p:tab title="Solicitudes Especiales">
+
+                        <div class="ui-g card card-w-title c-ligth">
+                            <div class="ui-g-2"><h:outputLabel for="noE" value="No. De Contrato:  " /><h:outputLabel id="no3E" style="color: #3fb839">EMBM1234</h:outputLabel></div>
+                            <div class="ui-g-4"></div>
+                            <div class="ui-g-2"><h:outputLabel for="esE2" value="Estatus:  " /><h:outputLabel id="es3E2" style="color: #3fb839">EN PROCESO</h:outputLabel></div>
+                        </div>
+                        <p:outputLabel value="GRX "/>
+                       
+                        <div class="ui-g card card-w-title c-ligth">
+                            
+                            <div class="ui-g-2"> 
+                                 <div class="ui-inputgroup" >
+                                            <p:inputText id="ta3E" size="10" placeholder="0"/>
+                                            <span class="ui-inputgroup-addon">Mbps</span>  
+                                        </div>
+                            </div>
+                            <div class="ui-g-2">
+                                <p:selectManyCheckbox id="chka3E" value="#{dfView.selectedConsoles}" layout="responsive" columns="1" styleClass="form-group">
+                                        <f:selectItem itemLabel="C. Directa" itemValue="Entrantes" />
+                                        <f:selectItem itemLabel="T. OnNet" itemValue="Salientes" />
+                                    </p:selectManyCheckbox>
+                            </div>
+                            <div class="ui-g-8"><h:outputLabel for="button19" value="Vigencia Del: " /><p:calendar id="button19" value="#{calendarView.date3}" showOn="button" />  <h:outputLabel for="button29" value=" Al: " /><p:calendar id="button29" value="#{calendarView.date3}" showOn="button" /></div>
+                            <div class="ui-g-12">
+                                <h4>CLASE DE SERVICIO</h4>
+                                
+                                <p:panelGrid columns="5">
+                                  <h:form>
+                                        <div class="ui-inputgroup" >
+                                            <span class="ui-inputgroup-addon">AF:</span>
+                                            <p:inputText id="Ta4E" size="10" />
+                                            <span class="ui-inputgroup-addon">%</span>  
+                                        </div>
+                                        <div class="ui-inputgroup" >
+                                            <span class="ui-inputgroup-addon">BE:</span>
+                                            <p:inputText id="Ta5E" size="10" />
+                                            <span class="ui-inputgroup-addon">%</span>  
+                                        </div>
+                                        <div class="ui-inputgroup" >
+                                            <span class="ui-inputgroup-addon">EF:</span>  
+                                            <p:inputText id="Ta6E" size="10" />
+                                            <span class="ui-inputgroup-addon">%</span>  
+                                        </div>
+                                   </h:form>
+                                </p:panelGrid>
+                                    
+                            </div> 
+                            <h4>PORCENTAJE DE CLASES</h4>
+                          
+                                <div class="ui-g-12">
+                                    <h:form>
+                                        <div class="ui-inputgroup" >
+                                            <p:inputText id="Ta7E" size="10" />
+                                            <span class="ui-inputgroup-addon">%</span>  
+                                        </div>
+                                        <p:selectManyCheckbox id="basic1E" value="#{checkboxView.selectedConsoles}">
+                                            <f:selectItem itemLabel="AF" itemValue="AF" />
+                                            <f:selectItem itemLabel="BE" itemValue="BE" />
+                                            <f:selectItem itemLabel="EF" itemValue="EF" />
+                                        </p:selectManyCheckbox>
+                                    </h:form>
+                                </div>
+                                
+                            <div class="ui-g-8" style="text-align:right;">
+                                    <p:commandButton type="button" value="Guardar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                                </div>
+                            
+                        </div>
+                        
+                        
+                    </p:tab>         
+                    <p:tab title="Documento">   
+                       <div class="ui-g card card-w-title c-ligth">
+                            <div class="ui-g-2"><h:outputLabel for="noE5" value="No. De Contrato:  " /><h:outputLabel id="no3E5" style="color: #3fb839">EMBM1234</h:outputLabel></div>
+                            <div class="ui-g-4"></div>
+                            <div class="ui-g-2"><h:outputLabel for="esE25" value="Estatus:  " /><h:outputLabel id="es3E25" style="color: #3fb839">EN PROCESO</h:outputLabel></div>
+                        </div>
+                        <h:form enctype="multipart/form-data">  
+                            <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                                          update="messages" sizeLimit="52428800" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/" 
+                                          cancelLabel="Cancelar" label="Seleccionar" uploadLabel="Guardar"/>
+
+                            <p:growl id="messages" showDetail="true" />          
+
+
+                            <p:dataList value="#{dtDoctos.documentos}" var="car" type="unordered" itemType="none" rows="10">
+                                <f:facet name="header">
+                                    Documentos
+                                </f:facet>
+
+                                <p:commandButton value="#{documento}" id="iconOnly2"  style="margin-right:20px;" icon="fa fa-file-pdf-o" onclick="PF('carDialog').show()" >
+                                    <f:setPropertyActionListener value="#{documento}" target="#{dtDoctos.documentos}" />
+                                </p:commandButton>    
+                                <!-- 
+                                 <p:commandLink  oncomplete="PF('carDialog').show()" title="View Detail" styleClass="" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
+                                     <f:setPropertyActionListener value="#{documento}" target="#{dtDoctos.documentos}" />
+                                     <h:outputText value="#{car.nombre}" />
+                                 </p:commandLink> -->
+                                <h:outputText value="#{car.nombre}" style="display:inline-block"/>
+                            </p:dataList>
+
+                            <p:dialog header="Documento" widgetVar="carDialog" modal="true" showEffect="blind" resizable="false">
+                                <p:outputPanel id="carDetail" style="text-align:center;">
+                                    <p:media value="https://www.w3.org/TR/2000/REC-xhtml-basic-20001219/xhtml-basic.pdf" width="500px" height="500px">
+                                        <h:outputLink value="https://www.w3.org/TR/2000/REC-xhtml-basic-20001219/xhtml-basic.pdf"/>
+                                    </p:media>
+                                </p:outputPanel>
+                            </p:dialog>
+
+
+                        </h:form>
+                    </p:tab>
+                </p:tabView>
+
+
+
+
+
+            </div>
+        </div>
+
+        <!-- Left Side -->
+
+
+    </ui:define>
+
+</ui:composition>

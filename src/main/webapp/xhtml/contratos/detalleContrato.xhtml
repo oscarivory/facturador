@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Detalle Contrato</title>
+        <style type="text/css">
+                    th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+    .value {
+        font-weight: bold;
+    }
+    .ui-panelgrid td, .ui-panelgrid tr
+    {
+     border-style: none !important
+    }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+    }
+    th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+         </style>
+        
+    </h:head>
+
+    
+    <h:body>
+        
+        <p:growl id="msgs" showDetail="true"/>
+        <p:tabView>
+            <p:tab title="Generales">
+               
+                    
+                    <p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-3 " styleClass="card card-w-title c-ligth" layout="grid">
+                        <p:panelGrid  columns="2">
+                        </p:panelGrid>
+                        <p:panelGrid  columns="2">
+                        </p:panelGrid>
+                        <p:panelGrid  columns="2">
+                        </p:panelGrid>
+                        <p:panelGrid  columns="2">
+                            <h:outputLabel for="no" value="No. De Contrato:  " /><h:outputLabel id="no" style="color: #3fb839">EMBM1234</h:outputLabel>
+                            <h:outputLabel for="es" value="Estatus:  " /><h:outputLabel id="es" style="color: #3fb839">AUTORIZADA</h:outputLabel>
+                        </p:panelGrid>
+                    </p:panelGrid>
+                
+                <p:panelGrid columns="1" columnClasses="ui-g-12 ui-md-4" styleClass="card card-w-title c-ligth" layout="grid">
+                        <h:outputLabel  value="Nombre de la empresa: EMBRATEL" />
+                             <h:outputLabel value="Razon Social: EMBRATEL" />
+                             <h:outputLabel value="Vigencia Del: 10/08/2019 Al: 10/08/2020" />
+                             <h:outputLabel for="ch" value="Renovacion Mensual: " /><p:selectBooleanCheckbox id="ch" value="true"/>
+                             
+                    </p:panelGrid>
+            </p:tab>
+            <p:tab title="Condiciones de Facturación">
+                <div class="ui-fluid" >
+                    <div class="ui-g" >
+                        <div class="ui-g-12">
+                            <h:form id="forma" prependId="false">                
+
+               <div class="card card-w-title">
+
+                                    <p:panel id="uno" rendered="true" style="border: none !important;">
+                                        <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" styleClass="card card-w-title c-ligth" layout="grid">
+                                            <p:panelGrid  columns="2">
+                                                <p:outputLabel for="b1" value="MSU's SS7: "/> <p:selectBooleanCheckbox id="b1" value="true"  /> 
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="1">
+                                                <p:outputLabel for="b1" value="MSU: 5 USD"/>
+                                            </p:panelGrid>
+                                             <p:panelGrid columns="2">
+                                                 <h:outputLabel for="itu" value="ITU " /><p:selectBooleanCheckbox id="itu" value="true"/>
+                                                <h:outputLabel for="ansi" value="ANSI " /><p:selectBooleanCheckbox id="ansi" value="true"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                <h:outputLabel for="Entrantes" value="Entrantes " /><p:selectBooleanCheckbox id="Entrantes" value="false"/>
+                                                <h:outputLabel for="Salientes" value="Salientes " /><p:selectBooleanCheckbox id="Salientes" value="true"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                <h:outputLabel for="Directa" value="C. Directa " /><p:selectBooleanCheckbox id="Directa" value="false"/>
+                                                <h:outputLabel for="OnNet" value="T. OnNet " /><p:selectBooleanCheckbox id="OnNet" value="true"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                            </p:panelGrid>
+                                        </p:panelGrid>
+                                        <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                     styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                            <p:panelGrid  columns="2">
+                                                <p:outputLabel for="b2" value="LTE DIAMITER: "/> <p:selectBooleanCheckbox id="b2" value="true"/> 
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                 <p:outputLabel for="b1" value="MSU: 5 USD"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                 <h:outputLabel for="Entrantes2" value="Entrantes " /><p:selectBooleanCheckbox id="Entrantes2" value="false"/>
+                                                <h:outputLabel for="Salientes2" value="Salientes " /><p:selectBooleanCheckbox id="Salientes2" value="true"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                  <h:outputLabel for="Directa2" value="C. Directa " /><p:selectBooleanCheckbox id="Directa2" value="false"/>
+                                                <h:outputLabel for="OnNet2" value="T. OnNet " /><p:selectBooleanCheckbox id="OnNet2" value="true"/>
+                                            </p:panelGrid>
+                                        </p:panelGrid>
+                                        <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-2,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                     styleClass="card card-w-title c-ligth" style=" background-color:transparent;">
+
+                                            <p:panelGrid  columns="2">
+                                                <p:outputLabel for="b3" value="GRX MBsps: "/> <p:selectBooleanCheckbox id="b3"  value="true"/> 
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                <p:outputLabel value="MSU: 5 USD"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                 <h:outputLabel for="Directa3" value="C. Directa " /><p:selectBooleanCheckbox id="Directa3" value="false"/>
+                                                <h:outputLabel for="OnNet3" value="T. OnNet " /><p:selectBooleanCheckbox id="OnNet3" value="true"/>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="1"></p:panelGrid>
+                                            <p:panelGrid columns="1"></p:panelGrid>
+                                            <p:panelGrid columns="1">
+                                                <h4>CLASE DE SERVICIO</h4>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="5">
+                                                <h:form>
+                                                    <div class="ui-inputgroup" >
+                                                        <span class="ui-inputgroup-addon">AF:</span>
+                                                        <p:inputText id="T4" size="10" value="65" />
+                                                        <span class="ui-inputgroup-addon">%</span>  
+                                                    </div>
+                                                    <div class="ui-inputgroup" >
+                                                        <span class="ui-inputgroup-addon">BE:</span>
+                                                        <p:inputText id="T5" size="10"  value="65" />
+                                                        <span class="ui-inputgroup-addon">%</span>  
+                                                    </div>
+                                                    <div class="ui-inputgroup" >
+                                                        <span class="ui-inputgroup-addon">EF:</span>  
+                                                        <p:inputText id="T6" size="10" value="65"  />
+                                                        <span class="ui-inputgroup-addon">%</span>  
+                                                    </div>
+                                                </h:form>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="1">
+                                                <h4>PORCENTAJE DE CLASES</h4>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                <h:form>
+                                                    <div class="ui-inputgroup" >
+                                                        <p:inputText id="T7" size="10" value="15" />
+                                                        <span class="ui-inputgroup-addon">%</span>  
+                                                    </div>
+                                                    <p:selectManyCheckbox id="basic" value="#{dtBasicView.selectedConsoles}">
+                                                        <f:selectItem itemLabel="AF" itemValue="AF"  />
+                                                        <f:selectItem itemLabel="BE" itemValue="BE" />
+                                                        <f:selectItem itemLabel="EF" itemValue="EF" />
+                                                    </p:selectManyCheckbox>
+                                                </h:form>
+                                            </p:panelGrid>
+                                        </p:panelGrid>
+                                        <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                     styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+
+                                            <p:panelGrid  columns="2">
+                                                <p:outputLabel for="n2" value="HMTA Monitoreo: "/><p:selectBooleanCheckbox id="n2" value="true"/> 
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="1">
+                                                <p:outputLabel for="b1" value="MSU: 5 USD"/>
+                                            </p:panelGrid>
+
+                                            <p:panelGrid columns="1">
+                                                <p:selectManyCheckbox id="chkboxn2" value="#{dtBasicView.selectedHM}" layout="responsive" columns="1" styleClass="form-group">
+                                                    <f:selectItem itemLabel="MSU's SS7" itemValue="SS7" />
+                                                    <f:selectItem itemLabel="LTE DIAMETER" itemValue="diamiter" />
+                                                    <f:selectItem itemLabel="GTPC" itemValue="GTPC" />
+                                                </p:selectManyCheckbox>
+                                            </p:panelGrid>
+                                            <p:panelGrid columns="2">
+                                                  <h:outputLabel for="Directa4" value="C. Directa " /><p:selectBooleanCheckbox id="Directa4" value="false"/>
+                                                <h:outputLabel for="OnNet4" value="T. OnNet " /><p:selectBooleanCheckbox id="OnNet4" value="true"/>
+                                            </p:panelGrid>
+                                        </p:panelGrid>
+                                        
+                                        <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                     styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                            <f:facet name="header" >COSTOS ADICIONALES</f:facet>
+                                        </p:panelGrid>
+                                        <p:panelGrid columns="5" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-2 ui-g-12 ui-md-2" layout="grid" 
+                                                     styleClass="card card-w-title c-ligth" style="background-color:transparent;">
+                                            <f:facet name="header" >PERIODO DE EXCEPCION</f:facet>
+                                        </p:panelGrid>
+                                    </p:panel>
+                      
+                                    
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </p:tab>
+            <p:tab title="Documento">   
+                 <p:dataList value="#{dtDoctos.documentos}" var="car" type="unordered" itemType="none" rows="10">
+                        <p:commandButton value="#{documento}" id="iconOnly2"  style="margin-right:20px;" icon="fa fa-file-pdf-o" onclick="PF('carDialog').show()" >
+                            <f:setPropertyActionListener value="#{documento}" target="#{dtDoctos.documentos}" />
+                        </p:commandButton>    
+                        <!-- 
+                         <p:commandLink  oncomplete="PF('carDialog').show()" title="View Detail" styleClass="" style="float:left;margin-right:10px;margin-top:3px; color:#333333">
+                             <f:setPropertyActionListener value="#{documento}" target="#{dtDoctos.documentos}" />
+                             <h:outputText value="#{car.nombre}" />
+                         </p:commandLink> -->
+                        <h:outputText value="#{car.nombre}" style="display:inline-block"/>
+                    </p:dataList>
+
+                    <p:dialog header="Documento" widgetVar="carDialog" modal="true" showEffect="blind" resizable="false">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:media value="https://www.w3.org/TR/2000/REC-xhtml-basic-20001219/xhtml-basic.pdf" width="500px" height="500px">
+                               <h:outputLink value="https://www.w3.org/TR/2000/REC-xhtml-basic-20001219/xhtml-basic.pdf"/>
+                            </p:media>
+                        </p:outputPanel>
+                    </p:dialog>
+            </p:tab>
+        </p:tabView>
+        
+        
+        
+        
+    </h:body>
+</html>
+

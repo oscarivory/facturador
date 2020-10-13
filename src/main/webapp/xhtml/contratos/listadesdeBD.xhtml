@@ -1,0 +1,114 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+    <style type="text/css">
+    .ui-panelgrid td, .ui-panelgrid tr
+    {
+     border-style: none !important
+    }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+    
+            th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+	  font-family: "Roboto", "Helvetica Neue", sans-serif;
+	  font-size: 10px;
+	  color: #757575;
+	  -webkit-font-smoothing: antialiased;
+	  padding: 0;
+	  margin: 0;
+	  min-height: 100%;
+	  background-color: #ffffff; 
+	  }
+         </style>
+
+            <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Contratos" url="#" />
+    <p:menuitem value="Litado desde BD" url="#" />
+    
+</p:breadCrumb>
+        <p:growl id="growl" showDetail="true" />
+        <h:form>
+
+   			<div class="ui-g">
+                 <div class="ui-g-12 ui-md-12" style="text-align:center">                                
+                     
+                     <p:commandButton type="button" value="Ejecutar SP" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"  action="#{resultadoSPcursosBean.getListaCursos(1)}"/><p:spacer width="10" />
+                     <p:commandButton type="button" value="Guardar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                     <p:commandButton type="button" value="Terminar Registro" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                     <p:commandButton type="button" value="Eliminar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                     <p:commandButton type="button" value="Cancelar" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/><p:spacer width="10"/>
+                 </div>
+            </div>
+            <p:dataTable widgetVar="tableCursos" var="curso" value="#{cursosBean.listaCursos}">
+                <p:column headerText="ID" priority="1" >
+                    <h:outputText value="#{curso.id}" />
+                </p:column>
+
+                <p:column headerText="Titulo" priority="2" >
+                    <h:outputText value="#{curso.titulo}" />
+                </p:column> 
+                
+                <p:column headerText="Nivel" priority="3" >
+                    <h:outputText value="#{curso.nivel}" />
+                </p:column> 
+                
+                <p:column headerText="Horas" priority="4" >
+                    <h:outputText value="#{curso.horas}" />
+                </p:column>
+                
+                <p:column headerText="idProfesor" priority="5" >
+                    <h:outputText value="#{curso.idProfesor}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:dataTable widgetVar="tableCursos2" var="curso2" value="#{resultadoSPcursosBean.getListaCursos(1)}">
+                <p:column headerText="ID" priority="1" >
+                    <h:outputText value="#{curso2.id}" />
+                </p:column>
+
+                <p:column headerText="Titulo" priority="2" >
+                    <h:outputText value="#{curso2.titulo}" />
+                </p:column> 
+                
+                <p:column headerText="Nivel" priority="3" >
+                    <h:outputText value="#{curso2.nivel}" />
+                </p:column> 
+                
+                <p:column headerText="Horas" priority="4" >
+                    <h:outputText value="#{curso2.horas}" />
+                </p:column>
+                
+                <p:column headerText="Profesor" priority="5" >
+                    <h:outputText value="#{curso2.nombre}" />
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+        
+      
+    </ui:define>
+
+</ui:composition>

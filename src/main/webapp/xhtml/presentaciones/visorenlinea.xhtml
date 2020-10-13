@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="../template/template.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .responsiveImage {
+                width: 100%;
+                height: 500px;
+            }
+            @media only screen and (max-width:400px) {
+                .responsiveImage {
+                    width: 400px;
+                    height: 300px;
+                }
+            }
+            @media screen and (max-width:1024px) and (min-width:769px){
+                .responsiveImage {
+                    width: 769px;
+                    height: 500px;
+                }
+            }
+            @media screen and (max-width:768px) and (min-width:521px){
+                .responsiveImage {
+                    width: 521px;
+                    height: 400px;
+                }
+            }
+            @media screen and (max-width:520px) and (min-width:320px)
+            {
+                .responsiveImage {
+                    width: 280px;
+                    height: 200px;
+                }
+            }
+        </style>
+        <script>
+            function fullScreen() {
+                document.getElementById("screen").style.display = "block";
+                if (!document.fullscreenElement) {
+                    document.getElementById("screen").requestFullscreen();
+                } else {
+                    document.getElementById("screen").style.display = "none";
+                    document.exitFullscreen();
+                }
+            }
+
+            function onKeyDownHandler() {
+                if (!document.fullscreenElement) {
+                    document.getElementById("screen").style.display = "none";
+                }
+            }
+
+            window.onload = function () {
+                document.onmousemove = onKeyDownHandler;
+            }
+
+        </script>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="forma" prependId="false">
+            <p:growl id="mensaje" showDetail="true" severity="info warn" life="5000" />
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-8" id="full">
+                    <div class="card">
+                        <h1>Mi presentación</h1>
+                        <p:commandButton icon="ui-icon-aspect-ratio" id="toggle" oncomplete="fullScreen();" style="margin-bottom: 5px"/>
+                        <p:commandButton type="button" icon="ui-icon-assignment-returned" style="margin-bottom: 5px"/>
+                        <iframe class="responsiveImage" src='https://view.officeapps.live.com/op/embed.aspx?src=http://prueba.rsvamx.com/ppt/Tablero.pptx' frameborder='0'/>
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-4">
+                    <div class="card">
+                        <h1>Categorías <p:commandButton type="button" icon="ui-icon-add" /></h1>
+                        <p:tree value="#{visorenlinea.root1}" var="doc"
+                                selectionMode="single" styleClass="ui-tree-demo">
+                            <p:treeNode expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+                                <h:outputText value="#{doc.name}"/>
+                            </p:treeNode>
+                            <p:treeNode type="document" icon="ui-icon-movie">
+                                <h:outputText value="#{doc.name}" />
+                            </p:treeNode>
+                            <p:treeNode type="picture" icon="ui-icon-movie">
+                                <h:outputText value="#{doc.name}" />
+                            </p:treeNode>
+                            <p:treeNode type="movie" icon="ui-icon-movie">
+                                <h:outputText value="#{doc.name}" />
+                            </p:treeNode>
+                        </p:tree>
+                    </div>
+                </div>
+            </div>
+            <div id="screen" style="display: none; background-color: #000000;" styleClass="responsiveImage">
+                <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://prueba.rsvamx.com/ppt/Tablero.pptx'
+                        width="100%" height="100%"
+                        frameborder='0'/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

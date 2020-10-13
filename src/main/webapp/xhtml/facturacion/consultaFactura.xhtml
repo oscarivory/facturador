@@ -1,0 +1,183 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Consulta</ui:define>
+
+    <ui:define name="content">
+                <p:breadCrumb>
+    <p:menuitem value="Categories" url="/facturador/faces/xhtml/inicio/inicio.xhtml" />
+    <p:menuitem value="Filiales" url="#" style="color:blue;"/>
+    <p:menuitem value="Facturacion" url="#" />
+    <p:menuitem value="Telcel" url="#" />
+    <p:menuitem value="Complementos" url="#" />
+    
+</p:breadCrumb>
+        <style>
+            th {
+        background:  #2c4053 !important;
+        color: #ffffff !important;
+    }
+    
+    body table {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 10px;
+  color: #757575;
+  -webkit-font-smoothing: antialiased;
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  background-color: #ffffff; }
+            .ui-datatable-header.ui-widget-header.ui-corner-top{
+                background-color: #ffffff;
+                text-align:right;
+            }
+        </style>
+        <style type="text/css">
+    .ui-panelgrid td, .ui-panelgrid tr
+    {
+     border-style: none !important
+    }
+    .ui-widget-content.ui-datatable-even,.ui-widget-content.ui-datatable-odd{
+        background: #ffffff !important;
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+    }
+    .ui-datatable-header.ui-widget-header.ui-corner-top{
+        border-left: #ffffff !important;
+        border-right : #ffffff !important;
+        border-top: #ffffff !important;
+        background-color: #ffffff;
+        text-align:right;
+        margin-right:0%;
+    }
+     body .ui-widget-content, body .ui-paginator.ui-paginator-bottom{
+  
+    border: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+  
+         </style>
+        
+        
+        
+        
+        <script type="text/javascript">
+            //<![CDATA[
+            function start() {
+                PF('statusDialog').show();
+            }
+
+            function stop() {
+                PF('statusDialog').hide();
+            }
+            //]]>
+        </script>  
+        <p:panel id="uno" rendered="true" style="border: none !important;">
+                
+                 <p:panelGrid columns="8" columnClasses="ui-g-12 ui-md-1,ui-g-12 ui-md-3,ui-g-12 ui-md-1,ui-g-12 ui-md-2,ui-g-12 ui-md-2,ui-g-12 ui-md-3,ui-g-12 ui-md-4,ui-g-12 ui-md-2" styleClass="card card-w-title c-ligth" layout="grid">
+                <p:outputLabel for="month" value="Periodo:" /><p:datePicker id="month" placeholder="Mes/Año" view="month" value="#{calendarView.date3}" pattern="MM/yyyy" yearNavigator="true" yearRange="2000:2030" />
+                 <p:outputLabel for="filial" value="Filial:" />   
+                <p:selectOneMenu id="filial">
+                        <f:selectItem itemLabel="TODO" itemValue="0" noSelectionOption="true" />
+                        <f:selectItem itemLabel="ARGENTINA" itemValue="1" />
+                        <f:selectItem itemLabel="BRASIL" itemValue="2" />
+                        <f:selectItem itemLabel="COLOMBIA" itemValue="3" />
+                    </p:selectOneMenu>
+                 <p:selectManyCheckbox id="ab1" value="#{dfView.selectedConsoles}" layout="responsive" columns="4" styleClass="form-elements">
+                        <f:selectItem itemLabel="SAP" itemValue="sap" />
+                        <f:selectItem itemLabel="COMPLEMENTOS" itemValue="comp" />
+                    </p:selectManyCheckbox>
+                    <p:commandButton type="button" value="Complementos" style="margin-bottom:10px;" styleClass="blue-btn raised-btn rounded-btn"/>
+                 
+            </p:panelGrid>
+            
+             <div class="ui-g">
+                    <div class="ui-g-8"/>
+                    <div class="ui-g-2" style=" background-color: #c3dfbb;">
+                        <p:outputLabel for="ba3" value="Factura Pagada: "/> <p:selectBooleanCheckbox id="ba3" /> 
+                    </div>
+                    <div class="ui-g-2" style=" background-color: #c3dfbb;">
+                        <p:outputLabel for="ba3" value="No. 123456789 "/>
+                    </div>                                </div>
+            
+            <p:panelGrid columns="1" columnClasses="ui-g-12" styleClass="card card-w-title c-ligth" layout="grid">      
+                <h:form>
+                    <p:tabView>
+                        <p:tab title="Invoice Detail">
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <p:graphicImage library="paradise-layout" name="/images/Screenshot_7.png" />
+                            </h:panelGrid>
+                           <!-- texto obligado -->
+
+                            <f:facet name="actions">
+                                <p:menuButton value="Exportar">
+                                    <p:menuitem value="Excel" ajax="false" icon="fa fa-file-excel-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.filePdf}" /></p:menuitem>
+                                    <p:separator />
+                                    <p:menuitem value="PDF"  ajax="false" icon="fa fa-file-pdf-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.fileExcel}" /></p:menuitem>
+                                    <p:separator />
+                                    <p:menuitem value="Email"  ajax="false" icon="fa fa-envelope" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.fileExcel}" /></p:menuitem>
+                                </p:menuButton>
+                            </f:facet>
+                        </p:tab>
+                        <p:tab title="Detail GSM Trans MSU's">
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <p:graphicImage library="paradise-layout" name="/images/Screenshot_8.png" />
+                            </h:panelGrid>
+                           <!-- texto obligado -->
+
+                            <f:facet name="actions">
+                                <p:menuButton value="Exportar">
+                                    <p:menuitem value="Excel" ajax="false" icon="fa fa-file-excel-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.filePdf}" /></p:menuitem>
+                                    <p:separator />
+                                    <p:menuitem value="PDF"  ajax="false" icon="fa fa-file-pdf-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.fileExcel}" /></p:menuitem>
+                                </p:menuButton>
+                            </f:facet>
+
+                        </p:tab>
+                        <p:tab title="Detail HMTA">
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <p:graphicImage library="paradise-layout" name="/images/Screenshot_3.png" />
+                            </h:panelGrid>
+                           <!-- texto obligado -->
+
+                            <f:facet name="actions">
+                                <p:menuButton value="Exportar">
+                                    <p:menuitem value="Excel" ajax="false" icon="fa fa-file-excel-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.filePdf}" /></p:menuitem>
+                                    <p:separator />
+                                    <p:menuitem value="PDF"  ajax="false" icon="fa fa-file-pdf-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.fileExcel}" /></p:menuitem>
+                                </p:menuButton>
+                            </f:facet>
+
+                        </p:tab>
+                        <p:tab title="Detail IPX">
+                            <!-- texto obligado -->
+
+                            <f:facet name="actions">
+                                <p:menuButton value="Exportar">
+                                    <p:menuitem value="Excel" ajax="false" icon="fa fa-file-excel-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.filePdf}" /></p:menuitem>
+                                    <p:separator />
+                                    <p:menuitem value="PDF"  ajax="false" icon="fa fa-file-pdf-o" onclick="PrimeFaces.monitorDownload(start, stop);"> <p:fileDownload value="#{fileDownloadView.fileExcel}" /></p:menuitem>
+                                </p:menuButton>
+                            </f:facet>
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <p:graphicImage library="paradise-layout" name="/images/Screenshot_4.png"  />
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </h:form>
+            </p:panelGrid>
+        </p:panel>
+        <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+            <p:graphicImage library="paradise-layout" name="/images/805.gif" />
+        </p:dialog>
+        
+    </ui:define>
+</ui:composition>
